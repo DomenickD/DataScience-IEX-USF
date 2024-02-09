@@ -1,6 +1,6 @@
 #Week 1 Activities Summary
 
-This week, we focused on using STormwind to complete a python basics/fundamentals course. 
+This week, we focused on using Stormwind to complete a python basics/fundamentals course. 
 We also focused on learning git, initializing our repositories on github and getting into a habit of using git to interact with github. 
 
 Some key notes: 

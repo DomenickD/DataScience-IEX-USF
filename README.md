@@ -1,4 +1,4 @@
-# This is the Offical Repository for the IEX-USF Internship proogram
+# This is the Offical Repository for the IEX-USF Internship program
 
 **Contents**:
 
