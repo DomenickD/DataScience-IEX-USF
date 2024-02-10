@@ -23,5 +23,5 @@ Things we will probably get to:
 
 # Resources
 
-- https://www.youtube.com/watch?v=vR-y_2zWrIE&list=PLWKjhJtqVAbkFiqHnNaxpOPhh9tSWMXIF
+- Git & Github Introduction from Freecodecamp.org on Youtube -> https://www.youtube.com/watch?v=vR-y_2zWrIE&list=PLWKjhJtqVAbkFiqHnNaxpOPhh9tSWMXIF
 
