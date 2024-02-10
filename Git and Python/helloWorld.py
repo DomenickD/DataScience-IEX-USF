@@ -15,6 +15,4 @@ print(f"The variable reversed is: {reverse_list(numbered_list)}")
 numbered_list.reverse()
 print(f"The variable reversed is: {numbered_list}")
 
-#The downside to the .reverse() function is I can't get the original list back with using this function again
-#using the reverse_list(list_of_numbers) function is more practical.
 
