@@ -20,3 +20,8 @@ Things we will probably get to:
 - `git pull`
 - Managing large datasets in git
 
+
+# Resources
+
+- https://www.youtube.com/watch?v=vR-y_2zWrIE&list=PLWKjhJtqVAbkFiqHnNaxpOPhh9tSWMXIF
+
