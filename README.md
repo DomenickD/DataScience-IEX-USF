@@ -3,5 +3,6 @@
 **Contents**:
 
 Week 1 - Git and Python Basics
+    - Hello World Program
 
 Week 2 - 
