@@ -2,7 +2,7 @@
 
 **Contents**:
 
-    - Git 
-    - Python
-    - Iris (Coming Soon)
-    - Titanic (In progress)
+- Git 
+- Python
+- Iris (Coming Soon)
+- Titanic (In progress)
