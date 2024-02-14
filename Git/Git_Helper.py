@@ -2,6 +2,34 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
 
+def update_details(*args):
+    command = command_var.get()
+    detail = detail_var.get()
+    detail_text.delete('1.0', tk.END)
+
+    if command == 'Add':
+        detail_text.insert(tk.END, f'Command: {command}\nAdds the specified files to the staging area for the next commit.')
+    elif command == 'Commit':
+        detail_text.insert(tk.END, f'Command: {command}\nCommits the staged changes with a message.')
+    elif command == 'Push':
+        detail_text.insert(tk.END, f'Command: {command}\nPushes the committed changes to the remote repository.')
+    elif command == 'Pull':
+        detail_text.insert(tk.END, f'Command: {command}\nFetches changes from the remote repository and merges them into the current branch.')
+    elif command == 'Branch':
+        detail_text.insert(tk.END, f'Command: {command}\nCreates, lists, renames, or deletes branches.')
+    elif command == 'Checkout':
+        detail_text.insert(tk.END, f'Command: {command}\nSwitches to the specified branch or restores working tree files.')
+    elif command == 'Merge':
+        detail_text.insert(tk.END, f'Command: {command}\nMerges the specified branch into the current branch.')
+    elif command == 'Clone':
+        detail_text.insert(tk.END, f'Command: {command}\nClones a repository into a new directory.')
+    elif command == 'Fetch':
+        detail_text.insert(tk.END, f'Command: {command}\nFetches changes from the remote repository without merging them.')
+    elif command == 'Status':
+        detail_text.insert(tk.END, f'Command: {command}\nDisplays the state of the working directory and the staging area.')
+    elif command == 'Log':
+        detail_text.insert(tk.END, f'Command: {command}\nShows the commit logs.')
+
 def update_output():
     command = command_var.get()
     detail = detail_var.get()
@@ -12,7 +40,7 @@ def update_output():
     elif command == 'Commit':
         output = f'git commit -m "{detail}"'
     elif command == 'Push':
-        output = f'git push {detail}'
+        output = f'git add *\ngit commit -m "{detail}"\ngit push upstream main'
     elif command == 'Pull':
         output = 'git pull'
     elif command == 'Branch':
@@ -29,8 +57,6 @@ def update_output():
         output = 'git status'
     elif command == 'Log':
         output = 'git log'
-    else:
-        messagebox.showerror('Error', 'Please select a valid command')
 
     output_text.delete('1.0', tk.END)
     output_text.insert(tk.END, output)
@@ -38,6 +64,7 @@ def update_output():
 def clear_fields():
     command_var.set('Select Command')
     detail_var.set('')
+    detail_text.delete('1.0', tk.END)
     output_text.delete('1.0', tk.END)
 
 root = tk.Tk()
@@ -62,6 +89,7 @@ command_label = ttk.Label(command_tab, text='Select Git Command:')
 command_label.pack(pady=10)
 command_combo = ttk.Combobox(command_tab, textvariable=command_var, values=commands)
 command_combo.pack(pady=10)
+command_var.trace('w', update_details)
 
 # Detail Tab
 detail_var = tk.StringVar()
@@ -69,6 +97,8 @@ detail_label = ttk.Label(detail_tab, text='Enter Details:')
 detail_label.pack(pady=10)
 detail_entry = ttk.Entry(detail_tab, textvariable=detail_var)
 detail_entry.pack(pady=10)
+detail_text = tk.Text(detail_tab, height=10, width=50)
+detail_text.pack(pady=10)
 
 # Output Tab
 output_text = tk.Text(output_tab, height=10, width=50)
