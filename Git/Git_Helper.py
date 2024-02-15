@@ -8,27 +8,27 @@ def update_details(*args):
     detail_text.delete('1.0', tk.END)
 
     if command == 'Add':
-        detail_text.insert(tk.END, f'Command: {command}\nAdds the specified files to the staging area for the next commit.')
+        detail_text.insert(tk.END, f'Command: git {command}\nThis command adds the specified files to the staging area for the next commit.')
     elif command == 'Commit':
-        detail_text.insert(tk.END, f'Command: {command}\nCommits the staged changes with a message.')
+        detail_text.insert(tk.END, f'Command: git {command}\nThis command commits the staged changes with a message.')
     elif command == 'Push':
-        detail_text.insert(tk.END, f'Command: {command}\nPushes the committed changes to the remote repository.')
+        detail_text.insert(tk.END, f'Command: git {command}\nThis command pushes the committed changes to the remote repository.')
     elif command == 'Pull':
-        detail_text.insert(tk.END, f'Command: {command}\nFetches changes from the remote repository and merges them into the current branch.')
+        detail_text.insert(tk.END, f'Command: git {command}\nThis command fetches changes from the remote repository and merges them into the current branch.')
     elif command == 'Branch':
-        detail_text.insert(tk.END, f'Command: {command}\nCreates, lists, renames, or deletes branches.')
+        detail_text.insert(tk.END, f'Command: git {command}\nThis command creates, lists, renames, or deletes branches.')
     elif command == 'Checkout':
-        detail_text.insert(tk.END, f'Command: {command}\nSwitches to the specified branch or restores working tree files.')
+        detail_text.insert(tk.END, f'Command: git {command}\nThis command switches to the specified branch or restores working tree files.')
     elif command == 'Merge':
-        detail_text.insert(tk.END, f'Command: {command}\nMerges the specified branch into the current branch.')
+        detail_text.insert(tk.END, f'Command: git {command}\nThis command merges the specified branch into the current branch.')
     elif command == 'Clone':
-        detail_text.insert(tk.END, f'Command: {command}\nClones a repository into a new directory.')
+        detail_text.insert(tk.END, f'Command: git {command}\nThis command clones a repository into a new directory.')
     elif command == 'Fetch':
-        detail_text.insert(tk.END, f'Command: {command}\nFetches changes from the remote repository without merging them.')
+        detail_text.insert(tk.END, f'Command: git {command}\nThis command fetches changes from the remote repository without merging them.')
     elif command == 'Status':
-        detail_text.insert(tk.END, f'Command: {command}\nDisplays the state of the working directory and the staging area.')
+        detail_text.insert(tk.END, f'Command: git {command}\nThis command displays the state of the working directory and the staging area.')
     elif command == 'Log':
-        detail_text.insert(tk.END, f'Command: {command}\nShows the commit logs.')
+        detail_text.insert(tk.END, f'Command: git {command}\nThis command shows the commit logs.')
 
 def update_output():
     command = command_var.get()
