@@ -40,7 +40,7 @@ def update_output():
     elif command == 'Commit':
         output = f'git commit -m "{detail}"'
     elif command == 'Push':
-        output = f'git add *\ngit commit -m "{detail}"\ngit push upstream main'
+        output = f'git add *\ngit commit -m "{detail}"\ngit push origin main'
     elif command == 'Pull':
         output = 'git pull'
     elif command == 'Branch':
