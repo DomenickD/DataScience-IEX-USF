@@ -115,3 +115,4 @@ clear_button = ttk.Button(button_frame, text='Clear', command=clear_fields)
 clear_button.pack(side='right', padx=10)
 
 root.mainloop()
+
