@@ -5,4 +5,4 @@
 - Git 
 - Python
 - Iris (Coming Soon)
-- Titanic (In progress)
+- Titanic. This will display all the machine learning and Neural Networks I currently know as I score models against eachother. 
