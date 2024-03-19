@@ -9,3 +9,8 @@ COPY HelloWorld.py .
 
 # Define the command to execute when the container starts
 CMD ["python", "HelloWorld.py"]
+
+# # template:
+# # docker build -t my-app . 
+
+# # docker run -p 8080:80 --name my-app-container my-app 
