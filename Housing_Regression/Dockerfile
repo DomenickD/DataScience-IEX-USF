@@ -13,7 +13,15 @@ EXPOSE 8888
 CMD ["start-notebook.sh", "--NotebookApp.token=''"]
 
 
-
+# datascience-notebook includes
+# NumPy: For numerical computations and array operations.
+# Pandas: For data manipulation and analysis.
+# Matplotlib: For plotting and visualization.
+# SciPy: For scientific computing, including optimization, linear algebra, integration, interpolation, special functions, FFT, signal and image processing.
+# Scikit-learn: For machine learning and data mining.
+# Seaborn: For statistical data visualization based on matplotlib.
+# Statsmodels: For statistical modeling and econometrics.
+# Sympy: For symbolic mathematics.
 
 # # Use an official Jupyter Notebook base image
 # FROM jupyter/base-notebook:latest
@@ -44,10 +52,10 @@ CMD ["start-notebook.sh", "--NotebookApp.token=''"]
 
 # # Start Jupyter Notebook
 # CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--no-browser", "--allow-root", "--NotebookApp.token=''"]
-# # The command to execute when the container starts. It starts the Jupyter Notebook server with these options:
-# # --ip=0.0.0.0: Listen on all network interfaces.
-# # --no-browser: Prevent a browser from automatically opening when the server starts.
-# # --allow-root: Allow running Jupyter Notebook as root (often necessary within containers).
+# The command to execute when the container starts. It starts the Jupyter Notebook server with these options:
+# --ip=0.0.0.0: Listen on all network interfaces.
+# --no-browser: Prevent a browser from automatically opening when the server starts.
+# --allow-root: Allow running Jupyter Notebook as root (often necessary within containers).
 
 # # docker build -t housing_project . 
 # #                 -Container name
@@ -58,6 +66,6 @@ CMD ["start-notebook.sh", "--NotebookApp.token=''"]
 # # template:
 # # docker build -t my-app . 
 
-# # docker run -d -p 8080:80 --name my-app-container my-app 
+# # docker run -p 8080:80 --name my-app-container my-app 
 
 
