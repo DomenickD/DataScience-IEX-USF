@@ -14,6 +14,11 @@ EXPOSE 8888
 
 CMD ["start-notebook.sh", "--NotebookApp.token=''"]
 
+FROM python:3.10-slim AS build-stage 
+WORKDIR /app 
+COPY requirements.txt ./
+RUN pip install -r requirements.txt
+
 
 
 
