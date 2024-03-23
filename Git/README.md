@@ -46,3 +46,5 @@ The following Git commands are currently supported:
 ## Notes
 
 * This program simplifies the process of crafting Git commands and is an excellent educational tool. However, it's highly recommended to become familiar with basic Git usage directly on the command line for greater control and flexibility.
+
+[Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
