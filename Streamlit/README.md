@@ -2,12 +2,12 @@
 
 Step 1:
 
-Run command ```pip install streamlit```
+- Run command ```pip install streamlit```
 
 Step 2: 
  
-Build program to run
+- Build program to run (See any .py file in this repo)
 
-STep 3:
+Step 3:
 
-in CLI, run command ```streamlit run myapp1.py```
+- In your command line/terminal, run command ```streamlit run myapp1.py```
