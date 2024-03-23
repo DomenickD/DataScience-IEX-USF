@@ -2,7 +2,9 @@
 
 **Contents**:
 
-- Git 
-- Python
+- Git Basics
+- Python Fundamentals
 - Iris (Coming Soon)
-- Titanic. This will display all the machine learning and Neural Networks I currently know as I score models against eachother. 
+- [Titanic](https://github.com/DomenickD/DataScience-IEX-USF/tree/main/Titanic). This will display all the machine learning and Neural Networks I currently know as I score models against eachother. 
+- Ames Housing Dataset. This will display a regression solution with different scoring methods than a classification problem.
+- Streamlit
