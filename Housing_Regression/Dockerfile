@@ -37,7 +37,8 @@ EXPOSE 8501
 # Command to run the Streamlit app
 CMD ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
 
-
+# docker build -t streamlit . 
+# docker run -p 8501:8501 streamlit
 
 
 
