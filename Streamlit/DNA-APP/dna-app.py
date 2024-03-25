@@ -12,7 +12,7 @@ st.write("""
 
 This app counts the nucleotide composition of a query of DNA.
          
-*Obtained from Freecodecamp on youtube* [Video here](https://www.youtube.com/watch?v=JwSS70SZdyM)
+**Obtained from Freecodecamp on youtube** [Video here](https://www.youtube.com/watch?v=JwSS70SZdyM)
 ***
          """)
 
