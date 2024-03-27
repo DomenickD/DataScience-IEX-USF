@@ -20,7 +20,7 @@
 # CMD ["jupyter", "lab", "--ip=0.0.0.0", "--port=8501", "--no-browser", "--allow-root"]
 
 # Base image
-FROM python:3.8
+FROM python:3.10
 
 # Working directory
 WORKDIR /app
