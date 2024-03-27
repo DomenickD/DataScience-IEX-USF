@@ -20,13 +20,13 @@ from sklearn import svm
 from sklearn.svm import SVC
 
 #import NN models - Pytorch
-import torch
-import torch.nn as nn
-import torch.optim as optim
-from torch.utils.data import DataLoader, TensorDataset
+# import torch
+# import torch.nn as nn
+# import torch.optim as optim
+# from torch.utils.data import DataLoader, TensorDataset
 
 #import NN models - Tensorflow
-import tensorflow as tf
+# import tensorflow as tf
 # from tensorflow.keras import layers, models
 
 #import accuracy_score function from sklearn.metrics to score models better
