@@ -99,9 +99,9 @@ train = train.drop(columns_to_drop, axis = 1)
 test = test.drop(columns_to_drop, axis = 1)
 
 #Let's fill in the ages with the mean of all ages.
-train['Age'].fillna(value = round(train['Age'].mean()), inplace = True) #look up .fillna function
+train['Age'].fillna(value = round(train['Age'].mean()), inplace = True)
 test['Age'].fillna(value = round(test['Age'].mean()), inplace = True) 
-train["Age"].count() #now we have every row accounted for. 
+
 
 # test["Fare"].dropna(axis=0, how='any', inplace=True)
 test['Fare'].fillna(value = round(test['Fare'].mean()), inplace = True) 
