@@ -41,6 +41,7 @@ test['Fare'].fillna(value = round(test['Fare'].mean()), inplace = True)
 test_merged = pd.merge(test, gender_submission, how="inner")
 
 titanic_data = pd.concat([train, test_merged], ignore_index=True)
+# titanic_data = titanic_data.drop("Unnamed: 0", axis=1)
 
 if not os.path.exists("titanic_data.csv"):
     titanic_data.to_csv("titanic_data.csv")
