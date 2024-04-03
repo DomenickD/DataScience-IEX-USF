@@ -7,6 +7,8 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import accuracy_score
 
+# 1_👋_Intro_to_the_Data_👋
+
 st.set_page_config(
     page_title="Titanic Analysis",
     page_icon="👋")
@@ -28,8 +30,16 @@ In this challenge, we ask you to build a predictive model that answers the quest
 """)
 
 st.write("""
+---
+## Problem Statement
+The goal of this project is to develop a predictive model that accurately identifies factors influencing passenger survival rates during the tragic sinking of the RMS Titanic. 
+         By analyzing historical passenger data, we seek to uncover patterns and relationships between individual characteristics 
+         (such as age, gender, socio-economic class, cabin location, etc.) and their likelihood of survival.
+         """)
+
+st.write("""
 ---       
-### List of Column Names and what the values represent
+## List of Column Names and what the values represent
          
 | Column Name    | Description                                                                     |
 |----------------|---------------------------------------------------------------------------------|
@@ -48,8 +58,6 @@ st.write("""
 ---
 """)
 
-st.header("Problem Statement")
-st.write("Predict passenger survival on the Titanic based on their characteristics.")
 train = pd.read_csv("train.csv")
 test = pd.read_csv("test.csv")
 gender_submission = pd.read_csv("gender_submission.csv")
@@ -90,5 +98,14 @@ accuracy = accuracy_score(test_labels, y_predict)
 
 with open('my_model.pkl', 'wb') as f:
      pickle.dump(model, f) 
+st.write(f"""
+## Model Details
+         
+This data was run against multiple models and multiple normalization methods. 
+The highest ratings were from the logistic regression model with a standardized MinMaxScalar provided by Sci-kit learn.
+The accuracy is currently **{round((100*accuracy), 2)}%**.    
+""")
+st.divider()
+
 
 
