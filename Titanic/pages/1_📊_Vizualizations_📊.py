@@ -17,7 +17,18 @@ st.subheader("The Combined Titanic Dataframe")
 titanic_data = pd.read_csv("titanic_data.csv")
 columns_to_drop = ["Unnamed: 0"] #, "Name", "Ticket", "Cabin", "Sex", "Embarked" 
 titanic_data = titanic_data.drop(columns_to_drop, axis=1)
-titanic_data
+
+column_to_filter_by = st.selectbox("Choose a column to filter by", titanic_data.columns)
+filter_options = st.multiselect("Filter by", options=titanic_data[column_to_filter_by].unique())
+
+# Filtering data based on selection
+if filter_options:
+    filtered_data = titanic_data[titanic_data[column_to_filter_by].isin(filter_options)]
+else:
+    filtered_data = titanic_data
+
+st.dataframe(filtered_data)
+# titanic_data
 st.caption("This is the combined dataset for the Titanic Data. It included the Train and Test csv files from Kaggle.")
 
 
@@ -97,10 +108,17 @@ fig.update_traces(marker_color='lightgreen')
 st.plotly_chart(fig) 
 
 
+
+
 st.caption("This plot represents the distribution of ages onboard the Titanic.")
 
 st.write("""---""")
 st.subheader("Titanic Heatmap")
+
+#move "Sruvived" to teh far right and bottom.
+temp_df = titanic_data["Survived"]
+titanic_data = titanic_data.drop(["Survived"], axis=1)
+titanic_data = titanic_data.merge(temp_df, how="left", left_index=True, right_index=True) 
 
 titanic_numbers = titanic_data.select_dtypes(include=np.number)
 mask = np.zeros_like(titanic_numbers.corr()) 
@@ -110,6 +128,8 @@ plt.figure(figsize=(8,6))
 sns.heatmap(titanic_numbers.corr(), annot=True, cmap='coolwarm', mask=mask)
 plt.xticks(rotation=45)
 st.pyplot(plt.gcf()) 
+
+st.caption("This Heatmap shows the correlation between features and 'Survived'.")
 
 
 
