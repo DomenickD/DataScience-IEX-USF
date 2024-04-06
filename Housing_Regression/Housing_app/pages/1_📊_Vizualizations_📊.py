@@ -7,7 +7,7 @@ import plotly.express as px
 import numpy as np
 
 import pickle
-import housing
+import Housing_Regression.Housing_app.housing as housing
 
 st.header("Visualizations")
 

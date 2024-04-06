@@ -1,5 +1,5 @@
 import streamlit as st
-import housing
+import Housing_Regression.Housing_app.housing as housing
 
 st.header("Housing Prediction Tool")
 housing.df
