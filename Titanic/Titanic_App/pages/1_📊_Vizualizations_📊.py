@@ -15,7 +15,7 @@ st.header("The Data")
 st.divider()
 st.subheader("The Combined Titanic Dataframe")
 titanic_data = pd.read_csv("titanic_data.csv")
-columns_to_drop = ["Unnamed: 0"] #, "Name", "Ticket", "Cabin", "Sex", "Embarked" 
+columns_to_drop = ["Unnamed: 0", "Pclass_1","Pclass_2","Pclass_3", "Sex_binary"] #, "Name", "Ticket", "Cabin", "Sex", "Embarked" 
 titanic_data = titanic_data.drop(columns_to_drop, axis=1)
 
 column_to_filter_by = st.selectbox("Choose a column to filter by", titanic_data.columns)
@@ -28,55 +28,33 @@ else:
     filtered_data = titanic_data
 
 st.dataframe(filtered_data)
-# titanic_data
+st.write(f"{filtered_data["PassengerId"].count()} results are displayed.")
 st.caption("This is the combined dataset for the Titanic Data. It included the Train and Test csv files from Kaggle.")
 
-
 st.write("""---""")
-st.subheader("Survival Distribution")
-# fig = px.histogram(titanic_data, x= "Survived")
-# fig.update_layout(
-#     xaxis_range=[-0.5, 1.5],
-#     yaxis_range = [0, 1000],  # Adjust zoom level
-#     barmode='overlay',  # Overlay bars for better visibility with few categories
-#     bargap=0.05  # Add a small gap between bars
-# )
-# fig.update_traces(marker_color=['red', 'green'], selector=dict(type='histogram'))
-# st.plotly_chart(fig)
 
-survived_counts = titanic_data['Survived'].value_counts().sort_index()
-fig = px.pie(survived_counts, 
-            values=survived_counts.values, 
-            names=['Did Not Survive', 'Survived'],
-            color_discrete_sequence=['green', 'red'] # Optional: Adjust colors
-            )
 
-st.plotly_chart(fig) 
-
-st.caption("""**This plot represents the distribution of survivors on board.**     
-- Red represents those who did NOT survive. 
-- Green represents those who survived.""")
-
-st.write("""---""")
 st.subheader("Survival Distribution by Passenger Class")
 
-fig = px.violin(titanic_data, 
-                y="Survived",  # Variable of interest
-                x="Pclass",   # Categorical variable for splitting the violins
-                color="Pclass",  # Color violins by category
-                box=True,        # Show box plot elements within the violin
-                points="all"    # Show all individual data points
-               )
+counts_class_1 = titanic_data[titanic_data['Pclass'] == 1]['Survived'].value_counts()
+counts_class_2 = titanic_data[titanic_data['Pclass'] == 2]['Survived'].value_counts()
+counts_class_3 = titanic_data[titanic_data['Pclass'] == 3]['Survived'].value_counts()
 
-fig.update_layout(xaxis_title="Passenger Class") 
-st.plotly_chart(fig) 
+# Correctly order counts (If 'Survived' and 'Not Survived' aren't present, fill with 0)
+counts_class_1 = counts_class_1.reindex([1, 0], fill_value=0)  
+counts_class_2 = counts_class_2.reindex([1, 0], fill_value=0) 
+counts_class_3 = counts_class_3.reindex([1, 0], fill_value=0) 
+
+# Create the graph
+fig = go.Figure(data=[
+    go.Bar(name='Class 1', x=['Survived', 'Not Survived'], y=counts_class_1, marker_color='gold'),
+    go.Bar(name='Class 2', x=['Survived', 'Not Survived'], y=counts_class_2, marker_color='skyblue'),
+    go.Bar(name='Class 3', x=['Survived', 'Not Survived'], y=counts_class_3, marker_color='grey')
+])
+fig.update_layout(barmode='group', xaxis_range=[-0.5, 1.5], bargap=0.1)
+st.plotly_chart(fig)
+
 st.caption("""Survival status of the passenger (0 = No, 1 = Yes).""")
-
-# fig = px.histogram(titanic_data, x="Survived", color="Pclass", barmode='group',
-#                    category_orders={"Pclass": [1, 2, 3]})
-# fig.update_layout(xaxis_range=[-0.5, 1.5], bargap=0.1) 
-# st.plotly_chart(fig)
-# st.caption("""something here""")
 
 st.write("""---""")
 st.subheader("Survival Distribution by Sex")
@@ -121,15 +99,34 @@ titanic_data = titanic_data.drop(["Survived"], axis=1)
 titanic_data = titanic_data.merge(temp_df, how="left", left_index=True, right_index=True) 
 
 titanic_numbers = titanic_data.select_dtypes(include=np.number)
-mask = np.zeros_like(titanic_numbers.corr()) 
-mask[np.triu_indices_from(mask)] = True
+# mask = np.zeros_like(titanic_numbers.corr()) 
+# mask[np.triu_indices_from(mask)] = True
 
 plt.figure(figsize=(8,6))
-sns.heatmap(titanic_numbers.corr(), annot=True, cmap='coolwarm', mask=mask)
+# sns.heatmap(titanic_numbers.corr(), annot=True, cmap='coolwarm', mask=mask)
+sns.heatmap(titanic_numbers.corr(), annot=True, cmap='coolwarm')
 plt.xticks(rotation=45)
+plt.yticks(rotation=45)
 st.pyplot(plt.gcf()) 
 
 st.caption("This Heatmap shows the correlation between features and 'Survived'.")
+
+st.divider()
+st.subheader("Survival Distribution")
+survived_counts = titanic_data['Survived'].value_counts().sort_index()
+fig = px.pie(survived_counts, 
+            values=survived_counts.values, 
+            names=['Did Not Survive', 'Survived'],
+            color_discrete_sequence=['red', 'green'] # Optional: Adjust colors
+            )
+
+st.plotly_chart(fig) 
+
+st.caption("""**This plot represents the distribution of survivors on board.**     
+- Red represents those who did NOT survive. 
+- Green represents those who survived.""")
+
+st.write("""---""")
 
 
 

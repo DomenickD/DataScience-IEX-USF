@@ -3,6 +3,6 @@ numpy
 scikit-learn
 matplotlib
 seaborn
-# torch
+plotly
 streamlit 
-# tensorflow
+pickle

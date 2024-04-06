@@ -15,7 +15,7 @@ st.set_page_config(
 
 st.write("""
 # Titanic Classification Dataset
-**Data Source:** [Kaggle](https://www.https://www.kaggle.com/c/titanic/data)
+**Data Source:** [Kaggle](www.kaggle.com/c/titanic/data)
          
 **Author:** Domenick Dobbs
 ***
@@ -29,6 +29,13 @@ While there was some element of luck involved in surviving, it seems some groups
 In this challenge, we ask you to build a predictive model that answers the question: “what sorts of people were more likely to survive?” using passenger data (ie name, age, gender, socio-economic class, etc).
 """)
 
+st.write("""
+---
+## Disclaimer about the data
+This dataset does not include all of the PEOPLE from the actual Titanic. 
+There are 1309 rows of data for *passengers* in this Kaggle Dataset. There were 2240 total Passengers **and** Crew.
+As a result, the 931 crew members are not accounted for. 
+""")
 st.write("""
 ---
 ## Problem Statement
