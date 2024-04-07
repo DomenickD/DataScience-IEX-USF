@@ -8,7 +8,7 @@ This Streamlit application is an interactive exploration of the Titanic passenge
 
 **1. Requirements**
 
-* Python 3.10
+* Python 3.12
 * Streamlit (`pip install streamlit`)
 * Pandas (`pip install pandas`)
 * Pickle (`pip install pickle`) - for loading the pre-trained model
