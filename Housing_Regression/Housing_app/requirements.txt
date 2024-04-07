@@ -7,3 +7,4 @@ streamlit
 xgboost
 pickle
 plotly
+statsmodels
