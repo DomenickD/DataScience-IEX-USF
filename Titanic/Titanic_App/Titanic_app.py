@@ -115,4 +115,5 @@ The accuracy is currently **{round((100*accuracy), 2)}%**.
 st.divider()
 
 
-
+with open('scaler.pkl', 'wb') as f: 
+    pickle.dump(min_max_scaler, f) 
