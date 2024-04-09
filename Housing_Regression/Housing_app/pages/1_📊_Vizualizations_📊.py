@@ -34,7 +34,7 @@ fig.update_layout(xaxis={'tickangle': 30},
                   yaxis_range=[0, 4500], # Adjust tick label rotation
                   bargap=0.2)  
 st.plotly_chart(fig)
-st.caption("""Using an algorthim, we were able to determien the top 6 features based on....""")
+st.caption("""Using an algorthim, we were able to determine the top 6 features.""")
 st.divider()
 
 ###
@@ -71,5 +71,7 @@ st.subheader("Correlation Heatmap")
 fig, ax = plt.subplots(figsize=(10, 8))  
 # sns.heatmap(housing.corr_matrix, annot=True, cmap='coolwarm', ax=ax, mask=mask) 
 sns.heatmap(housing.corr_matrix, annot=True, cmap='coolwarm', ax=ax) 
+plt.xticks(rotation=45)
+plt.yticks(rotation=45)
 st.pyplot(fig)
 st.caption("""This Heatmap will display correlations between features. We are only concerned with what correlates with the SalesPrice feature.""")

@@ -62,7 +62,7 @@ Naviagting to the visualization page will display a searchable dataframe that wi
 
 ---
 
-The prediction tool has a few sliders that will allow you to input your own data for what class passenger you would be, your sex, your age, and approx. how much you would have spent on the fare to board the Titanic. This data will be entered in the model to give a prediction on whether or not you would have survived the titanic. 
+The prediction tool has a few sliders that will allow you to input your own data for what class passenger you would be, your sex, your age, and approx. how much you would have spent on the fare to board the Titanic. This data will be entered in the model to give a prediction on whether or not you would have survived the Titanic. 
 
 ![Tool_One](Pictures/Tool_1.png)
 
