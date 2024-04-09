@@ -44,6 +44,32 @@ Open http://localhost:8501 in your web browser to access the Streamlit app.
 
 ```streamlit run Housing_app.py```
 
+## Navigating the App
+
+Once the app is running, you will see the left side of the screen will have a navigation bar.
+
+![Sidebar Image](Pictures/Sidebar.png)
+
+You will start on the "Housing App" page which will display summary information on the data, features, model, and scaling functions used. 
+
+![Home_One](Pictures/Home_1.png)
+
+![Home_Two](Pictures/Home_2.png)
+
+---
+
+Naviagting to the visualization page will display a searchable dataframe that will count the number of results from each search. Below that there will be various plots to represent the data in relation to the Sale Price and Feature Importnace. 
+
+![Viz_One](Pictures/Vis_1.png)
+
+---
+
+The prediction tool has a few sliders that will allow you to input your own data. By giving it your Lot Area, Overall Building Quality, Total Basement Square Footage, Above Grade Living Area, Bathrooms, Rooms above Grade, and Fireplaces; we can predict with 88% accuracy what the home's Saleprice would be during this period. 
+
+![Tool_One](Pictures/Tool_1.png)
+
+---
+
 ## Conclusions
 
 * The Features that had the largest impact of teh Sale Price are: Above-grade living area (sq. ft.), Rates overall material and finish and Total basement area (sq. ft.).
