@@ -16,9 +16,15 @@ st.set_page_config(
 st.write("""
 # Titanic Classification Dataset
 **Data Source:** [Kaggle](www.kaggle.com/c/titanic/data)
-         
-**Author:** Domenick Dobbs
-***
+     
+**Author:** Domenick Dobbs""")
+st.divider()
+
+st.image("Pictures/Titanic.png")
+st.caption("Source: https://cdn.britannica.com/79/4679-050-BC127236/Titanic.jpg")
+st.divider()
+
+st.write("""
 ## Overview of this project from Kaggle
 The sinking of the Titanic is one of the most infamous shipwrecks in history.
 

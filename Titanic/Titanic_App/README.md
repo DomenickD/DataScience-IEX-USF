@@ -42,6 +42,15 @@ Open http://localhost:8501 in your web browser to access the Streamlit app.
 
 ```streamlit run Titanic_app.py```
 
+## Navigation in the App
+
+Once the app is running, you will see the left side of teh screen will have a navigation bar.
+
+![Sidebar Image](Pictures/Sidebar.png)
+
+
+
+
 ## Conclusions
 
 * First Class Passengers had a higher chance of survival.
