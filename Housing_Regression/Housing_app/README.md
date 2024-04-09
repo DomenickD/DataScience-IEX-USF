@@ -48,7 +48,7 @@ Open http://localhost:8501 in your web browser to access the Streamlit app.
 
 Once the app is running, you will see the left side of the screen will have a navigation bar.
 
-![Sidebar Image](Pictures/Sidebar.png)
+![Sidebar Image](Pictures/SideBar.png)
 
 You will start on the "Housing App" page which will display summary information on the data, features, model, and scaling functions used. 
 
