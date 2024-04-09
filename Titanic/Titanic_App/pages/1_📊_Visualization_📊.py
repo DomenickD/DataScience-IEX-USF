@@ -11,7 +11,7 @@ import numpy as np
 
 titanic_data = pd.read_csv("titanic_data.csv")
 
-st.header("The Data")
+st.header("Visualizing the Data")
 st.divider()
 st.subheader("The Combined Titanic Dataframe")
 titanic_data = pd.read_csv("titanic_data.csv")
