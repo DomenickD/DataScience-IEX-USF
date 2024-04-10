@@ -39,9 +39,9 @@ corr_matrix = df_corr.corr()
 
 st.header("House Prices Predictor")
 st.write("""
-Data Source:  [Github](https://github.com/rasbt/machine-learning-book/blob/main/ch09/AmesHousing.txt)       
+**Data Source**:  [Github](https://github.com/rasbt/machine-learning-book/blob/main/ch09/AmesHousing.txt)       
 
-Author: Domenick Dobbs          
+**Author**: Domenick Dobbs          
 """)
 st.divider()
 st.image("Pictures/Ames_Downtown.png")
