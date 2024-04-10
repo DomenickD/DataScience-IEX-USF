@@ -14,3 +14,6 @@ EXPOSE 8501
 
 # Command to run the Streamlit app
 CMD ["streamlit", "run", "Titanic_app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+
+# docker build -t titanic-app . 
+# docker run -p 8501:8501 --name titanic titanic-app

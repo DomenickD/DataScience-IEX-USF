@@ -93,7 +93,7 @@ st.caption("This plot represents the distribution of ages onboard the Titanic.")
 st.write("""---""")
 st.subheader("Titanic Heatmap")
 
-#move "Sruvived" to teh far right and bottom.
+#move "Survived" to teh far right and bottom.
 temp_df = titanic_data["Survived"]
 titanic_data = titanic_data.drop(["Survived"], axis=1)
 titanic_data = titanic_data.merge(temp_df, how="left", left_index=True, right_index=True) 

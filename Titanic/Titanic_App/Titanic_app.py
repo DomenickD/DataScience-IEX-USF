@@ -15,7 +15,7 @@ st.set_page_config(
 
 st.write("""
 # Titanic Classification Dataset
-**Data Source:** [Kaggle](www.kaggle.com/c/titanic/data)
+**Data Source:** [Kaggle](https://www.kaggle.com/c/titanic/data)
      
 **Author:** Domenick Dobbs""")
 st.divider()
