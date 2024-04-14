@@ -34,8 +34,11 @@ def logout():
     flash('You were just logged out!')
     return redirect(url_for('login'))
 
-@app.route('/predict', methods=['POST'])
+@app.route('/predict', methods=['GET', 'POST'])
 def predict():
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
+    
     if request.method == 'POST':
         # Extract form data
         pclass = request.form['pclass']
@@ -58,8 +61,9 @@ def predict():
 
         # Render the same prediction page with the result
         return render_template('predict.html', prediction=prediction)
-
-    return redirect(url_for('predict'))
+    else:
+        # Render the empty form for initial GET request
+        return render_template('predict.html', prediction=None)
 
 
 if __name__ == '__main__':
