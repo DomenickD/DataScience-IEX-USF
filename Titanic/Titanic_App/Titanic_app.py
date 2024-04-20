@@ -1,11 +1,20 @@
 import streamlit as st
 import pandas as pd
+import numpy as np
 import os.path
 import pickle
 
 from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import accuracy_score
+
+from sklearn.impute import SimpleImputer
+
+from sklearn.model_selection import GridSearchCV, RandomizedSearchCV
+from skopt import BayesSearchCV 
+from sklearn.base import BaseEstimator, TransformerMixin
+from sklearn.pipeline import Pipeline
+
 
 # 1_👋_Intro_to_the_Data_👋
 
@@ -81,10 +90,36 @@ gender_submission = pd.read_csv("gender_submission.csv")
 train['Sex_binary'] = train.Sex.map({"male": 0, "female": 1}) 
 test['Sex_binary'] = test.Sex.map({"male": 0, "female": 1})
 
-train['Age'].fillna(value = round(train['Age'].mean()), inplace = True)
-test['Age'].fillna(value = round(test['Age'].mean()), inplace = True) 
+class RoundingTransformer(BaseEstimator, TransformerMixin):
+    def fit(self, X, y=None):
+        return self  # Nothing to fit
 
-test['Fare'].fillna(value = round(test['Fare'].mean()), inplace = True) 
+    def transform(self, X):
+        X = X.round() 
+        return X
+    
+imputer = SimpleImputer(strategy='mean')
+rounder = RoundingTransformer()
+preprocessing_pipeline = Pipeline([
+    ('imputer', imputer),
+    ('rounder', rounder)
+])
+
+# Create the scaler
+min_max_scaler = MinMaxScaler()
+
+# Create the logistic regression model
+model = LogisticRegression()
+
+# Create the pipeline
+pipeline = Pipeline([
+    ('preprocessing', preprocessing_pipeline),
+    ('scaler', min_max_scaler),
+    ('lr', model)
+])
+# train['Age'].fillna(value = round(train['Age'].mean()), inplace = True)
+# test['Age'].fillna(value = round(test['Age'].mean()), inplace = True) 
+# test['Fare'].fillna(value = round(test['Fare'].mean()), inplace = True) 
 
 
 test_merged = pd.merge(test, gender_submission, how="inner")
@@ -93,24 +128,63 @@ titanic_data = pd.concat([train, test_merged], ignore_index=True)
 if not os.path.exists("titanic_data.csv"):
     titanic_data.to_csv("titanic_data.csv")
 
-train_features = train[["Age", "Sex_binary", "Pclass", "Fare"]]
-train_labels = train["Survived"]
-test_features = test[["Age", "Sex_binary", "Pclass", "Fare"]]
-test_labels = gender_submission["Survived"]
+# Assign Features and Labels
+X_train = train[["Pclass", "Age", "SibSp", "Parch", "Fare", "Sex_binary"]]
+# X_train = train[["Pclass", "Age", "Fare", "Sex_binary"]]
+y_train = train["Survived"]
+X_test = test[["Pclass", "Age", "SibSp", "Parch", "Fare", "Sex_binary"]]
+# X_test = test[["Pclass", "Age", "Fare", "Sex_binary"]]
+y_test = gender_submission["Survived"]
 
-min_max_scaler = MinMaxScaler()
-model = LogisticRegression()
+# train_features = train[["Age", "Sex_binary", "Pclass", "Fare"]]
+# train_labels = train["Survived"]
+# test_features = test[["Age", "Sex_binary", "Pclass", "Fare"]]
+# test_labels = gender_submission["Survived"]
+# train_features_scaled = min_max_scaler.fit_transform(train_features)
+# test_features_scaled = min_max_scaler.fit_transform(test_features)
+# model.fit(train_features_scaled, train_labels)
+# y_predict = model.predict(test_features_scaled)
+# accuracy = accuracy_score(test_labels, y_predict)
 
-train_features_scaled = min_max_scaler.fit_transform(train_features)
-test_features_scaled = min_max_scaler.fit_transform(test_features)
+# # Fit the pipeline to your training data 
+pipeline.fit(X_train, y_train)
 
-model.fit(train_features_scaled, train_labels)
-y_predict = model.predict(test_features_scaled)
+# Make predictions
+predictions = pipeline.predict(X_test)
+accuracy_before_optim = accuracy_score(y_test, predictions)
 
-accuracy = accuracy_score(test_labels, y_predict)
+param_grid = {
+    'lr__penalty': ['l1', 'l2'],
+    'lr__C': [0.001, 0.01, 0.1, 1, 10, 100, 110, 125, 150, 200],
+    'lr__C': np.logspace(-3, 2, num=10),
+    'lr__solver': ['liblinear', 'saga'],
+    'lr__class_weight': [None, 'balanced']
+}
+
+# GridSearchCV
+grid_search = GridSearchCV(pipeline, param_grid, cv=10)
+grid_search.fit(X_train, y_train)
+
+best_params = {'C': 0.5994842503189409, 'class_weight': None, 'penalty': 'l1', 'solver': 'liblinear'}
+
+pipeline = Pipeline([
+    ('preprocessing', preprocessing_pipeline),
+    ('scaler', MinMaxScaler()),
+    ('lr', LogisticRegression(**best_params) )
+])
+
+# # Fit the pipeline to your training data 
+pipeline.fit(X_train, y_train)
+
+# Make predictions
+predictions = pipeline.predict(X_test)
+
+accuracy = accuracy_score(y_test, predictions)
 
 with open('my_model.pkl', 'wb') as f:
      pickle.dump(model, f) 
+
+
 st.write(f"""
 ## Model Details
          

@@ -7,6 +7,10 @@ import seaborn as sns
 import pandas as pd
 import numpy as np
 
+import Titanic_app as titanic
+from sklearn.model_selection import cross_val_score, learning_curve, validation_curve
+
+
 
 
 titanic_data = pd.read_csv("titanic_data.csv")
@@ -127,6 +131,62 @@ st.caption("""**This plot represents the distribution of survivors on board.**
 - Green represents those who survived.""")
 
 st.write("""---""")
+
+st.subheader("Learning Curve")
+train_sizes, train_scores, test_scores = learning_curve(
+    titanic.pipeline, titanic.X_train, titanic.y_train, cv=10, n_jobs=5, train_sizes=np.linspace(0.1, 1.0, 10))
+
+# Calculate means and standard deviations for plotting
+train_mean = np.mean(train_scores, axis=1)
+train_std = np.std(train_scores, axis=1)
+test_mean = np.mean(test_scores, axis=1)
+test_std = np.std(test_scores, axis=1)
+
+# Plot the learning curve
+fig, ax = plt.subplots() 
+ax.plot(train_sizes, train_mean, label='Training score')
+ax.fill_between(train_sizes, train_mean - train_std, train_mean + train_std, alpha=0.1)
+ax.plot(train_sizes, test_mean, label='Cross-validation score')
+ax.fill_between(train_sizes, test_mean - test_std, test_mean + test_std, alpha=0.1)
+
+ax.set_xlabel("Training examples")
+ax.set_ylabel("Score")
+ax.legend()
+st.pyplot(fig) 
+
+st.caption("Explain what we see here.")
+
+
+st.divider()
+
+st.subheader("Validation Curve: Varying C")
+
+param_name = 'lr__C'  # Choose a hyperparameter to vary
+param_range = np.logspace(-3, 2, num=5)
+
+train_scores, test_scores = validation_curve(
+    titanic.pipeline, titanic.X_train, titanic.y_train, param_name=param_name, param_range=param_range, cv=10)
+
+train_mean = np.mean(train_scores, axis=1)
+train_std = np.std(train_scores, axis=1)
+test_mean = np.mean(test_scores, axis=1)
+test_std = np.std(test_scores, axis=1)
+
+# Plot the validation curve
+fig, ax = plt.subplots() 
+ax.plot(param_range, train_mean, label='Training score')
+ax.fill_between(param_range, train_mean - train_std, train_mean + train_std, alpha=0.1)
+ax.plot(param_range, test_mean, label='Cross-validation score')
+ax.fill_between(param_range, test_mean - test_std, test_mean + test_std, alpha=0.1)
+
+ax.set_xlabel("C (Regularization parameter)")
+ax.set_ylabel("Score")
+ax.legend()
+ax.set_xscale('log') 
+st.pyplot(fig) 
+
+st.caption("Explain what we see here.")
+
 
 
 
