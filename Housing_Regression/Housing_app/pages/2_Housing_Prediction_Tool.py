@@ -1,15 +1,14 @@
 import streamlit as st
 import pickle
 import pandas as pd
-import Housing_App as housing
 from sklearn.preprocessing import MinMaxScaler
-with open('my_model.pkl', 'rb') as f:
-    model = pickle.load(f)
+# with open('my_model.pkl', 'rb') as f:
+#     model = pickle.load(f)
 
-# Scalerminmax = MinMaxScaler()
-with open('scaler.pkl', 'rb') as f:
-    Scalerminmax = pickle.load(f)
-
+# # Scalerminmax = MinMaxScaler()
+# with open('scaler.pkl', 'rb') as f:
+#     Scalerminmax = pickle.load(f)
+loaded_pipeline = pickle.load(open('xgb_pipeline_minmaxscaler.pkl', 'rb'))
 st.write("""
 ## Housing Price Exploration Tool
 
@@ -39,8 +38,8 @@ user_input = pd.DataFrame({
 })
 
 if st.button("Predict"):
-    user_input_scaled = Scalerminmax.transform(user_input)
-    prediction = model.predict(user_input_scaled)[0]
+    # user_input_scaled = Scalerminmax.transform(user_input)
+    prediction = loaded_pipeline.predict(user_input)[0]
 
     st.subheader("Predicted Sale Price")
     st.write(f"${prediction:,.2f}")

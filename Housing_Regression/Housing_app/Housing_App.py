@@ -8,6 +8,10 @@ from sklearn.feature_selection import SelectKBest, f_regression
 from sklearn.model_selection import train_test_split as tts
 import xgboost as xgb #pip install xgboost
 from sklearn import metrics
+from sklearn.pipeline import Pipeline
+from scipy.stats import randint, uniform
+from sklearn.model_selection import RandomizedSearchCV
+
 
 
 columns = ['Gr Liv Area', 'Total Bsmt SF', 'Full Bath', 'TotRms AbvGrd', 'Fireplaces', 'Lot Area', 'Overall Qual', 'SalePrice']
@@ -22,18 +26,23 @@ df = pd.read_csv('AmesHousing.txt',
 df = df.dropna(axis=0)
 Y = df.SalePrice
 X = df.drop("SalePrice", axis = 1)
-Scalerminmax = MinMaxScaler()
-df_scaled = Scalerminmax.fit_transform(X)
 
-X_train, X_test, y_train, y_test = tts(df_scaled, Y, test_size=0.2, random_state=42)
 
+pipeline = Pipeline([
+    ('scaler', MinMaxScaler()),
+    ('xgb', xgb.XGBRegressor())
+])
+X_train, X_test, y_train, y_test = tts(X, Y, test_size=0.2, random_state=42)
+
+pipeline.fit(X_train, y_train)
+#for the plot on next page
 selector = SelectKBest(score_func=f_regression, k=6)
 X_train_new = selector.fit_transform(X_train, y_train)
 best_feature_indices = selector.get_support(indices=True) 
 original_column_names = X.columns.to_list()  # Store the names
 best_features = np.array(original_column_names)[best_feature_indices]
 
-
+#for corrlation matrix plot on next page
 df_corr = pd.concat([X, Y], axis=1, ignore_index=False)
 corr_matrix = df_corr.corr()
 
@@ -81,15 +90,44 @@ st.write("""
 
 ***
 """)
-xgb_regr_model = xgb.XGBRegressor()
-xgb_regr_model.fit(X_train, y_train)
 
-
-y_pred = xgb_regr_model.predict(X_test)
+y_pred = pipeline.predict(X_test)
 mse = metrics.mean_squared_error(y_test, y_pred)
 mae = metrics.mean_absolute_error(y_test, y_pred)
 r2 = metrics.r2_score(y_test, y_pred)
 
+
+param_dist = {
+    'xgb__n_estimators': randint(100, 400),
+    'xgb__max_depth': randint(2, 8),
+    'xgb__learning_rate': uniform(0.01, 0.2),
+    'xgb__subsample': uniform(0.6, 0.4),
+    'xgb__colsample_bytree': uniform(0.6, 0.4),
+    'xgb__reg_alpha': uniform(0, 1)
+}
+# @st.cache_resource
+# def run_random_search_cv(pipeline, X_train, y_train, param_dist):
+#     # ... Your RandomizedSearchCV code
+#     random_search = RandomizedSearchCV(pipeline, param_dist, n_iter=100, cv=5, scoring='neg_mean_squared_error', verbose=1)
+#     return random_search.best_estimator_
+# random_search.fit(X_train, y_train)
+
+# best_model = random_search.best_estimator_
+
+@st.cache_resource
+def get_fitted_model(_pipeline, X_train, y_train, _param_dist):
+    random_search = RandomizedSearchCV(_pipeline, _param_dist, n_iter=100, cv=5, scoring='neg_mean_squared_error', verbose=1)
+    random_search.fit(X_train, y_train)  # Fit the model once
+    return random_search.best_estimator_
+
+# Usage on Main Page
+best_model = get_fitted_model(pipeline, X_train, y_train, param_dist)
+
+predictions = best_model.predict(X_test)
+mse_post = metrics.mean_squared_error(y_test, predictions)
+mae_post = metrics.mean_absolute_error(y_test, predictions)
+r2_post = metrics.r2_score(y_test, predictions)
+# print(f"Model: XGB Regression\nMSE: {mse_post:.2f}\nMAE: {mae_post:.2f}\nR-squared: {r2_post:.2f}\n-----------------")
 
 st.write(f"""
 ## Model Summary
@@ -99,16 +137,18 @@ st.write(f"""
  
 ---
          
-##  Model Performance Metrics
+##  Model Performance Metrics before Hyperparameter Tuning
 - Mean Squared Error: {mse:.2f}
 - Mean Absolute Error : {mae:.2f}
-- R-Squared: {r2:.2f}
+- R-Squared: {r2:.4f}
+
+##  Model Performance Metrics AFTER Hyperparameter Tuning
+- Mean Squared Error: {mse_post:.2f}
+- Mean Absolute Error : {mae_post:.2f}
+- R-Squared: {r2_post:.4f}
 
  """)
 st.divider()
 
-with open('my_model.pkl', 'wb') as f:
-    pickle.dump(xgb_regr_model, f) 
-
-with open('scaler.pkl', 'wb') as f: 
-    pickle.dump(Scalerminmax, f) 
+filename = 'xgb_pipeline_minmaxscaler.pkl'
+pickle.dump(pipeline, open(filename, 'wb'))
