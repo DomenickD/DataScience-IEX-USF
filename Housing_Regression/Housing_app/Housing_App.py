@@ -23,7 +23,7 @@ df = pd.read_csv('AmesHousing.txt',
 # df["Central_Air_Binary"] = df['Central Air'].map({'N': 0, 'Y': 1})
 # df = df.drop("Central Air", axis = 1)
 
-df = df.dropna(axis=0)
+df = df.dropna()
 Y = df.SalePrice
 X = df.drop("SalePrice", axis = 1)
 
@@ -105,24 +105,35 @@ param_dist = {
     'xgb__colsample_bytree': uniform(0.6, 0.4),
     'xgb__reg_alpha': uniform(0, 1)
 }
+
 # @st.cache_resource
-# def run_random_search_cv(pipeline, X_train, y_train, param_dist):
-#     # ... Your RandomizedSearchCV code
-#     random_search = RandomizedSearchCV(pipeline, param_dist, n_iter=100, cv=5, scoring='neg_mean_squared_error', verbose=1)
+# def get_fitted_model(_pipeline, X_train, y_train, _param_dist):
+#     random_search = RandomizedSearchCV(_pipeline, _param_dist, n_iter=100, cv=5, scoring='neg_mean_squared_error', verbose=1)
+#     random_search.fit(X_train, y_train)  # Fit the model once
 #     return random_search.best_estimator_
-# random_search.fit(X_train, y_train)
-
-# best_model = random_search.best_estimator_
-
-@st.cache_resource
-def get_fitted_model(_pipeline, X_train, y_train, _param_dist):
-    random_search = RandomizedSearchCV(_pipeline, _param_dist, n_iter=100, cv=5, scoring='neg_mean_squared_error', verbose=1)
-    random_search.fit(X_train, y_train)  # Fit the model once
-    return random_search.best_estimator_
 
 # Usage on Main Page
-best_model = get_fitted_model(pipeline, X_train, y_train, param_dist)
+# best_model = get_fitted_model(pipeline, X_train, y_train, param_dist)
 
+best_model = Pipeline(steps=[('scaler', MinMaxScaler()),
+                ('xgb',
+                 xgb.XGBRegressor(base_score=None, booster=None, callbacks=None,
+                              colsample_bylevel=None, colsample_bynode=None,
+                              colsample_bytree=0.8196235298606114, device=None,
+                              early_stopping_rounds=None,
+                              enable_categorical=False, eval_metric=None,
+                              feature_types=None, gamma=None, grow_policy=None,
+                              importance_type=None,
+                              interaction_constraints=None,
+                              learning_rate=0.03186751598813972, max_bin=None,
+                              max_cat_threshold=None, max_cat_to_onehot=None,
+                              max_delta_step=None, max_depth=4, max_leaves=None,
+                              min_child_weight=None,
+                              monotone_constraints=None, multi_strategy=None,
+                              n_estimators=268, n_jobs=None,
+                              num_parallel_tree=None, random_state=None))])
+
+best_model.fit(X_train, y_train)
 predictions = best_model.predict(X_test)
 mse_post = metrics.mean_squared_error(y_test, predictions)
 mae_post = metrics.mean_absolute_error(y_test, predictions)

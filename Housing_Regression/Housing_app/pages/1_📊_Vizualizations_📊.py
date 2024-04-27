@@ -4,8 +4,8 @@ import seaborn as sns
 import plotly.graph_objects as go
 import plotly.express as px
 import numpy as np
-from Housing_App import pipeline, X_train, y_train, best_model, corr_matrix, df, best_features, selector
-from sklearn.model_selection import learning_curve, validation_curve
+from Housing_App import pipeline, X_train, y_train, best_model, corr_matrix, df, best_features, selector, r2
+from sklearn.model_selection import learning_curve, validation_curve, cross_val_score
 
 st.header("Visualizations")
 
@@ -124,11 +124,24 @@ ax.fill_between(param_range, train_mean - train_std, train_mean + train_std, alp
 ax.plot(param_range, test_mean, label='Cross-validation score')
 ax.fill_between(param_range, test_mean - test_std, test_mean + test_std, alpha=0.1)
 
-
 ax.set_xlabel("C (Regularization parameter)")
 ax.set_ylabel("Score")
 ax.legend()
 ax.set_xscale('log') 
 st.pyplot(fig)
 
-st.caption("Learning Curve.")
+cv_scores = cross_val_score(pipeline, X_train, y_train, cv=10)
+cv_mean = np.mean(cv_scores)
+cv_std = np.std(cv_scores)
+
+st.caption(f"Accuracy Score: {r2:.4f} ± {cv_std:.4f}")
+
+st.divider()
+st.subheader("Unsupervised Learning - K-Means++")
+st.image('Pictures\K-Means++_Elbow_Plot.png')
+st.caption("Here is the attempt at applying Kmeans++ to the Ames Housing Dataset.")
+
+st.divider()
+st.subheader("Unsupervised Learning - DBSCAN")
+st.image('Pictures\DBSCAN_Default_Params.png')
+st.caption("Here is the attempt at applying DBSCAN to the Ames Housing Dataset.")
