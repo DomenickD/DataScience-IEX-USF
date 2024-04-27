@@ -185,7 +185,21 @@ ax.legend()
 ax.set_xscale('log') 
 st.pyplot(fig) 
 
-st.caption("Explain what we see here.")
+cv_scores = cross_val_score(titanic.pipeline, titanic.X_train, titanic.y_train, cv=10)
+cv_mean = np.mean(cv_scores)
+cv_std = np.std(cv_scores)
+
+st.caption(f"Accuracy Score: {titanic.accuracy:.4f} ± {cv_std:.4f}")
+
+st.divider()
+st.subheader("Unsupervised Learning - K-Means++")
+st.image('Pictures\KMEANS++_Elbow.png')
+st.caption("Here is the attempt at applying Kmeans++ to the Titanic Dataset.")
+
+st.divider()
+st.subheader("Unsupervised Learning - DBSCAN")
+st.image('Pictures\DBSCAN_DEFAULT.png')
+st.caption("Here is the attempt at applying DBSCAN to the Titanic Dataset. No noticable trends.")
 
 
 
