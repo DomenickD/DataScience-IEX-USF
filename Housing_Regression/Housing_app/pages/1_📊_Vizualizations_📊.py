@@ -9,7 +9,7 @@ from sklearn.model_selection import learning_curve, validation_curve, cross_val_
 
 st.header("Visualizations")
 
-st.write("""---""")
+st.divider()
 
 column_to_filter_by = st.selectbox("Choose a column to filter by", df.columns)
 filter_options = st.multiselect("Filter by", options=df[column_to_filter_by].unique())

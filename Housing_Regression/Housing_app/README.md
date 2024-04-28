@@ -54,13 +54,69 @@ You will start on the "Housing App" page which will display summary information 
 
 ![Home_One](Pictures/Home_1.png)
 
-![Home_Two](Pictures/Home_2.png)
+![Home_Two](Pictures/Home2.png)
+
+![Hyperparam_Metrics](Pictures/Hyperparam_Metrics.png)
 
 ---
 
-Naviagting to the visualization page will display a searchable dataframe that will count the number of results from each search. Below that there will be various plots to represent the data in relation to the Sale Price and Feature Importnace. 
+Naviagting to the visualization page will display a searchable dataframe that will count the number of results from each search. Below that there will be various plots to represent the data in relation to the Sale Price of the home and Feature Importance. 
 
 ![Viz_One](Pictures/Vis_1.png)
+
+---
+
+![Feature_Importance](Pictures/Feature_Importance.png)
+
+After running an algorithm to determine feature importance, this was the result.
+
+---
+
+![Distro_of_Sales_Prices](Pictures/Distro_of_Sales_Prices.png)
+
+This shows the distribution of housing sale prices. 
+
+---
+
+![Relationship](Pictures/relation_abvgrdliv_to_saleprice.png)
+
+This shows a linear relationship between the above grade living area and the sale price. 
+
+---
+
+![Box_Plot](Pictures/SalePrice_BoxPlot.png)
+
+Box Plot displaying the outliers and median/mean sale price by quality.
+
+---
+
+![Heatmap](Pictures/Heatmap.png)
+
+On this heatmap, we want to focus on the SalePirce Correlation on the bottom row to answer our problem and feed our model stronger correlated data. This will help with more accurate predictions. 
+
+---
+
+![Learning_Curve](Pictures/Learning_Curve.png)
+
+This learning curve is showing a high degree of variance, currently. We want to try to reduce this variance. 
+
+---
+
+![Validation_Curve](Pictures/Validation_Curve.png)
+
+This validation curve shows the cross validation, visually. 
+
+---
+
+![Elbow_Plot](Pictures/Elbow_Plot.png)
+
+This is teh elbow plot from trainging a model with K-Means++. Normally we see a more define elbow which tells us how many clusters are in the data. This model does not require labels and is amazing for discovering hidden trends in the data. 
+
+---
+
+![DBSCAN](Pictures/DBSCAN.png)
+
+This plot represents the output from the unsupervised model - DBSCAN. 
 
 ---
 
