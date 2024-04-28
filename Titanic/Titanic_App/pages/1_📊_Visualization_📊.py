@@ -201,9 +201,3 @@ st.subheader("Unsupervised Learning - DBSCAN")
 st.image('Pictures\DBSCAN_DEFAULT.png')
 st.caption("Here is the attempt at applying DBSCAN to the Titanic Dataset. No noticable trends.")
 
-
-
-
-
-
-

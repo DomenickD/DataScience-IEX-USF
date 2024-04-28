@@ -151,7 +151,7 @@ pipeline.fit(X_train, y_train)
 
 # Make predictions
 predictions = pipeline.predict(X_test)
-accuracy_before_optim = accuracy_score(y_test, predictions)
+accuracy = accuracy_score(y_test, predictions)
 
 param_grid = {
     'lr__penalty': ['l1', 'l2'],
@@ -162,8 +162,8 @@ param_grid = {
 }
 
 # GridSearchCV
-grid_search = GridSearchCV(pipeline, param_grid, cv=10)
-grid_search.fit(X_train, y_train)
+# grid_search = GridSearchCV(pipeline, param_grid, cv=10)
+# grid_search.fit(X_train, y_train)
 
 best_params = {'C': 0.5994842503189409, 'class_weight': None, 'penalty': 'l1', 'solver': 'liblinear'}
 
@@ -179,7 +179,7 @@ pipeline.fit(X_train, y_train)
 # Make predictions
 predictions = pipeline.predict(X_test)
 
-accuracy = accuracy_score(y_test, predictions)
+accuracy_post = accuracy_score(y_test, predictions)
 
 with open('my_model.pkl', 'wb') as f:
      pickle.dump(model, f) 
@@ -190,7 +190,15 @@ st.write(f"""
          
 This data was run against multiple models and multiple normalization methods. 
 The highest ratings were from the logistic regression model with a standardized MinMaxScalar provided by Sci-kit learn.
-The accuracy is currently **{round((100*accuracy), 2)}%**.    
+         
+Model Accuracy before Hyperparameter Tuning: 
+         
+**{round((100*accuracy), 2)}%**.
+
+Model Accuracy AFTER Hyperparameter Tuning: 
+
+**{round((100*accuracy_post), 2)}**%.
+
 """)
 st.divider()
 
