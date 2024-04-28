@@ -154,7 +154,7 @@ ax.set_ylabel("Score")
 ax.legend()
 st.pyplot(fig) 
 
-st.caption("Explain what we see here.")
+st.caption("This is the learning curve for the model.")
 
 
 st.divider()
