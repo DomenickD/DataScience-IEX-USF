@@ -134,7 +134,7 @@ cv_scores = cross_val_score(pipeline, X_train, y_train, cv=10)
 cv_mean = np.mean(cv_scores)
 cv_std = np.std(cv_scores)
 
-st.caption(f"Accuracy Score: {r2:.4f} ± {cv_std:.4f}")
+st.caption(f"R2 Score: {r2:.4f} ± {cv_std:.4f}")
 
 st.divider()
 st.subheader("Unsupervised Learning - K-Means++")
