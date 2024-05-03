@@ -14,12 +14,18 @@ pclass = st.selectbox('Passenger Class:', [1, 2, 3])
 sex = st.selectbox('Sex:', ['male', 'female'])
 age = st.slider('Age:', 0, 100, 30)
 Fare = st.slider('Fare:', 0, 512, 100)
+sib = st.selectbox('Number of Siblings/Spouses:', ['0', '1', '2', '3'])
+par = st.selectbox('Number of Parents/Children:', ['0', '1', '2', '3'])
+
+# X_train = train[["Pclass", "Age", "SibSp", "Parch", "Fare", "Sex_binary"]]
 
 user_input = pd.DataFrame({
-    'Age': [age],
-    'Sex_binary': sex_map[sex],
     'Pclass': [pclass],
-    'Fare': [Fare]
+    'Age': [age],
+    "SibSp": [sib],
+    "Parch": [par],
+    'Fare': [Fare],
+    'Sex_binary': sex_map[sex]
 })
 
 with open('my_model.pkl', 'rb') as f:
@@ -38,9 +44,11 @@ if st.button("Predict"):
     if prediction == 1:
         st.success("You Survived!")
         st.balloons()
+        st.image('Pictures/I_surived.png')
     else:
         st.error("You did not survive...")
         st.markdown("""
                     <h2 style='text-align: center; color: red;'> ❌ You did not survive... </h2> 
                     """, unsafe_allow_html=True)
+        st.image('Pictures/wasted.png')
 

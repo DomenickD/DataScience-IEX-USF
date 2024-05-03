@@ -205,3 +205,6 @@ st.divider()
 
 with open('scaler.pkl', 'wb') as f: 
     pickle.dump(min_max_scaler, f) 
+
+
+    
