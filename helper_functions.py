@@ -1,5 +1,5 @@
 """
-To use this file and it's functions, use the following code.
+To use this file and it's functions, use the following code:
 
 import requests
 from pathlib import Path
@@ -11,6 +11,8 @@ else:
   request = requests.get("https://raw.githubusercontent.com/DomenickD/DataScience-IEX-USF/main/helper_functions.py")
   with open("helper_functions.py", "wb") as f:
     f.write(request.content)
+
+from helper_functions import [whatever function you want to use today!]
 
 """
 from sklearn.metrics import accuracy_score, r2_score
@@ -27,7 +29,7 @@ def train_and_evaluate_classification_model(X_train, y_train, X_test, y_test, mo
         y_train: Training data labels.
         X_test: Testing data features.
         y_test: Testing data labels.
-        models: A list of sklearn models to evaluate. Defaults to None (StandardScaler will be used).
+        models: A list of sklearn models to evaluate. 
         scaler: An sklearn scaler object to use. Defaults to StandardScaler.
 
     Returns:
@@ -37,16 +39,20 @@ def train_and_evaluate_classification_model(X_train, y_train, X_test, y_test, mo
     results = {}  # Dictionary to store results
 
     for model in models:
-        model.fit(X_train, y_train)
-        y_pred = model.predict(X_test)
+        scaler.fit(X_train)
+        X_train_scaled = scaler.transform(X_train)
+        X_test_scaled = scaler.transform(X_test)
+        model.fit(X_train_scaled, y_train)
+        y_pred = model.predict(X_test_scaled)
         accuracy = accuracy_score(y_test, y_pred)
 
-        if isinstance(model, StandardScaler):
-            model_name = "StandardScaler"
-        else:
-            model_name = type(model).__name__
+        scaler_name = type(scaler).__name__
+        
+        model_name = type(model).__name__
 
-        results[model_name] = accuracy
+        dict_key = (f"{model_name} -- {scaler_name}")
+
+        results[dict_key] = accuracy
 
     pprint.pprint(results)  # Pretty print the results dictionary - inspired by Brett
     return results 
@@ -61,7 +67,7 @@ def train_and_evaluate_regression_model(X_train, y_train, X_test, y_test, models
         y_train: Training data labels.
         X_test: Testing data features.
         y_test: Testing data labels.
-        models: A list of sklearn models to evaluate. Defaults to None (StandardScaler will be used).
+        models: A list of sklearn models to evaluate. 
         scaler: An sklearn scaler object to use. Defaults to StandardScaler.
 
     Returns:
@@ -71,16 +77,20 @@ def train_and_evaluate_regression_model(X_train, y_train, X_test, y_test, models
     results = {}  # Dictionary to store results
 
     for model in models:
-        model.fit(X_train, y_train)
-        y_pred = model.predict(X_test)
+        scaler.fit(X_train)
+        X_train_scaled = scaler.transform(X_train)
+        X_test_scaled = scaler.transform(X_test)
+        model.fit(X_train_scaled, y_train)
+        y_pred = model.predict(X_test_scaled)
         r2 = r2_score(y_test, y_pred)
 
-        if isinstance(model, StandardScaler):
-            model_name = "StandardScaler"
-        else:
-            model_name = type(model).__name__
+        scaler_name = type(scaler).__name__
+        
+        model_name = type(model).__name__
 
-        results[model_name] = r2
+        dict_key = (f"{model_name} -- {scaler_name}")
+
+        results[dict_key] = r2
 
     pprint.pprint(results)  # Pretty print the results dictionary - inspired by Brett
     return results 
