@@ -138,7 +138,7 @@ Once the button is pressed, it will show a number based on the features given as
 
 ## Conclusions
 
-* The Features that had the largest impact of teh Sale Price are: Above-grade living area (sq. ft.), Rates overall material and finish and Total basement area (sq. ft.).
+* The Features that had the largest impact of the Sale Price are: Above-grade living area (sq. ft.), Rates overall material and finish and Total basement area (sq. ft.).
 
 * Surprisingly, the size of the lot did not play as large a role in the Sale Price as previously thought.
 
