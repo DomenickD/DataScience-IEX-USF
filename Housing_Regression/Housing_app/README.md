@@ -124,6 +124,16 @@ The prediction tool has a few sliders that will allow you to input your own data
 
 ![Tool_One](Pictures/Tool_1.png)
 
+![Tool_Two](Pictures/Tool_Success.png)
+
+Once the button is pressed, it will show a number based on the features given as to what the model believe is the right Sales Price. 
+
+---
+
+![Advanced_Display_One](Pictures/ADp1.png)
+
+![Advanced_Display_Two](Pictures/ADp2.png)
+
 ---
 
 ## Conclusions
