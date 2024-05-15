@@ -1,6 +1,6 @@
 """
 To use this file and it's functions, use the following code:
-
+```
 import requests
 from pathlib import Path
 # download helper functions from the github repo
@@ -11,13 +11,18 @@ else:
   request = requests.get("https://raw.githubusercontent.com/DomenickD/DataScience-IEX-USF/main/helper_functions.py")
   with open("helper_functions.py", "wb") as f:
     f.write(request.content)
-
+```
 from helper_functions import [whatever function you want to use today!]
 
 """
 from sklearn.metrics import accuracy_score, r2_score
 from sklearn.preprocessing import StandardScaler
 import pprint
+from sklearn.model_selection import RandomizedSearchCV
+from sklearn.linear_model import LogisticRegression
+from sklearn.naive_bayes import GaussianNB
+from sklearn.svm import LinearSVC
+from sklearn.ensemble import RandomForestClassifier
 
 def train_and_evaluate_classification_model(X_train, y_train, X_test, y_test, models, scaler=StandardScaler()):
 
@@ -94,3 +99,46 @@ def train_and_evaluate_regression_model(X_train, y_train, X_test, y_test, models
 
     pprint.pprint(results)  # Pretty print the results dictionary - inspired by Brett
     return results 
+
+# Function for Logistic Regression hyperparameter tuning
+def tune_logistic_regression(X_train, y_train):
+    param_grid = {
+        'C': [0.001, 0.01, 0.1, 1, 10, 100],  # Inverse of regularization strength
+        'penalty': ['l1', 'l2'],               # Regularization type (Lasso or Ridge)
+        'solver': ['liblinear', 'saga']        # Solver algorithm
+    }
+    grid_search = RandomizedSearchCV(LogisticRegression(), param_grid, cv=5, scoring='accuracy')
+    grid_search.fit(X_train, y_train)
+    return grid_search.best_params_
+
+# Function for Gaussian Naive Bayes hyperparameter tuning
+def tune_gaussian_nb(X_train, y_train):
+    param_grid = {
+        'var_smoothing': [1e-9, 1e-8, 1e-7, 1e-6, 1e-5] # Smoothing parameter for variance
+    }
+    grid_search = RandomizedSearchCV(GaussianNB(), param_grid, cv=5, scoring='accuracy')
+    grid_search.fit(X_train, y_train)
+    return grid_search.best_params_
+
+# Function for LinearSVC hyperparameter tuning
+def tune_linear_svc(X_train, y_train):
+    param_grid = {
+        'C': [0.001, 0.01, 0.1, 1, 10, 100],     # Inverse of regularization strength
+        'loss': ['hinge', 'squared_hinge'],      # Loss function
+        'dual': [True, False]                   # Whether to solve the dual or primal optimization problem
+    }
+    grid_search = RandomizedSearchCV(LinearSVC(random_state=42), param_grid, cv=5, scoring='accuracy')
+    grid_search.fit(X_train, y_train)
+    return grid_search.best_params_
+
+# Function for Random Forest Classifier hyperparameter tuning
+def tune_random_forest(X_train, y_train):
+    param_grid = {
+        'n_estimators': [100, 200, 300],     # Number of trees in the forest
+        'max_depth': [None, 5, 10, 20],     # Maximum depth of the tree
+        'min_samples_split': [2, 5, 10],     # Minimum number of samples required to split an internal node
+        'min_samples_leaf': [1, 2, 4]        # Minimum number of samples required to be at a leaf node
+    }
+    grid_search = RandomizedSearchCV(RandomForestClassifier(random_state=42), param_grid, cv=5, scoring='accuracy')
+    grid_search.fit(X_train, y_train)
+    return grid_search.best_params_
