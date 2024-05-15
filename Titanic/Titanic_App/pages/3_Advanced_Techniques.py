@@ -35,7 +35,7 @@ st.write("""
 
 Combines predictions from different models (e.g., linear regression, decision trees, neural networks) using another model to learn how to best weigh their outputs.
          
-To build the stacking model, I used SVC, NB, and a Random Forest Classifier. I then designated teh final estimator as Logistic Regression (because this was my highest rated raw model).
+To build the stacking model, I used SVC, NB, and a Random Forest Classifier. I then designated the final estimator as Logistic Regression (because this was my highest rated raw model).
 
 The accuracy for the stacking model compliation is: *84.00%*.
 """)

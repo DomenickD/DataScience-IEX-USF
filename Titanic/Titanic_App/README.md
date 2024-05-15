@@ -118,9 +118,26 @@ Here, we attempted to find trends using the DBSCAN unsupervised learning algorit
 
 ---
 
+![Advanced_1](Pictures/Advanced_1.png)
+
+---
+
+![Advanced_2](Pictures/Advanced_2.png)
+
+---
+
 The prediction tool has a few sliders that will allow you to input your own data for what class passenger you would be, your sex, your age, and approx. how much you would have spent on the fare to board the Titanic. This data will be entered in the model to give a prediction on whether or not you would have survived the Titanic. 
 
 ![Tool_One](Pictures/Tool_1.png)
+
+---
+
+![Dead](Pictures/Dead.png)
+
+---
+
+![Alive](Pictures/Alive.png)
+
 
 
 
