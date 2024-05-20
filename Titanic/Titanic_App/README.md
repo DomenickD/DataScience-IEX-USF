@@ -138,6 +138,27 @@ The prediction tool has a few sliders that will allow you to input your own data
 
 ![Alive](Pictures/Alive.png)
 
+---
+
+![nn_1](Pictures/nn_1.png)
+
+---
+
+![nn_2](Pictures/nn_2.png)
+
+---
+
+![nn_3](Pictures/nn_3.png)
+
+---
+
+![nn_4](Pictures/nn_4.png)
+
+---
+
+![nn_5](Pictures/nn_5.png)
+
+---
 
 
 
