@@ -19,8 +19,8 @@ This Streamlit app provides an interactive comparison of PyTorch and TensorFlow,
 
 1. **Clone the Repository:**
    ```bash
-   git clone https://your_repository_link
-   cd mnist-framework-showdown
+   git clone https://github.com/DomenickD/DataScience-IEX-USF/tree/main/Neural_Networks
+   cd Neural_Networks
    ```
 
 2. **Install Dependencies:**
