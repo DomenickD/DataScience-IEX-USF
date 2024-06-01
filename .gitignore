@@ -1,2 +1,7 @@
 # Ignore the entire NLP/aclImdb directory
 NLP/aclImdb/
+
+# Important Considerations:
+
+# Existing files: If you've already committed files from the NLP/aclImdb folder to your repository, Git will continue to track them even after you add this rule to your .gitignore file. You'll need to remove them from the repository using git rm --cached NLP/aclImdb/* before this rule takes effect.
+# Specificity: This rule is very specific to the NLP/aclImdb folder. If you have other files or folders within the NLP directory that you want to track, you'll need to adjust the rule accordingly or add more specific rules.
