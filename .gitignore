@@ -1,5 +1,8 @@
-# Ignore the entire NLP/aclImdb directory
+# Ignore the aclImdb folder
 NLP/aclImdb/
+
+# Ignore the aclImdb_v1.tar.gz file
+NLP/aclImdb_v1.tar.gz
 
 # Important Considerations:
 
