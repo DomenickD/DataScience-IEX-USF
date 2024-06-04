@@ -81,6 +81,12 @@ This app is designed for Curious Learners to explore how the same model behaves 
 
 ---
 
+![tensorboard_pytorch](Pictures/tensorboard_pytorch.png)
+
+This is the screenshot for tensorboard displaying a *pytorch* made Neural Network.
+
+---
+
 ![tensorflow_1](Pictures/tensorflow_1.png)
 
 ---
@@ -90,6 +96,12 @@ This app is designed for Curious Learners to explore how the same model behaves 
 ---
 
 ![tensorflow_3](Pictures/tensorflow_3.png)
+
+---
+
+![tensorboard_tensorflow](Pictures/tensorboard_tensorflow.png)
+
+This is the screenshot for tensorboard displaying a *tensorflow* made Neural Network.
 
 ---
 
