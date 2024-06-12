@@ -18,6 +18,9 @@ st.write("""
 
 - Stopword Removal: Consider removing common words like "the," "a," "an," etc. These words appear frequently but might not be significant for tasks like text classification or topic modeling.
 """)
+
+st.divider()
+
 st.write("### Try it yourself!")
 input_text = "Try it yourself!"
 input_text = st.text_area("Enter your text:", height=150)
@@ -38,18 +41,6 @@ if input_text:
     st.subheader("Numbers & Special Characters Removed:")
     st.code(cleaned_text, language="text")
 
-# st.code("""
-# import re
-# def preprocessor(text):
-#     text = re.sub('<[^>]*>', '', text)
-#     emoticons = re.findall('(?::|;|=)(?:-)?(?:\)|\(|D|P)',
-#                            text)
-#     text = (re.sub('[\W]+', ' ', text.lower()) +
-#             ' '.join(emoticons).replace('-', ''))
-#     return text
-# """)
-# st.caption("This is one such function the helps to remove emoticons from reviews. We only want to deal with words.")
-
 st.divider()
 st.subheader("Tokenization")
 st.write("""
@@ -64,12 +55,12 @@ st.write("### Try it yourself!")
 
 if input_text:
     # Word Tokenization
-    word_tokens = cleaned_text.split()
+    word_tokens = input_text.split()
     st.subheader("Word Tokens:")
     st.write(word_tokens)
 
     # Sentence Tokenization (Simplified)
-    sentences = cleaned_text.split(".")  # Basic split on periods
+    sentences = input_text.split(".")  # Basic split on periods
     st.subheader("Sentence Tokens (Basic):")
     st.write(sentences)
 

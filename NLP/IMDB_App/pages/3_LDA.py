@@ -5,6 +5,8 @@ st.write("""
 Latent Dirichlet Allocation (pronounced *lay-tent deer-ish-lay al-oh-kay-shun*) is a method to uncover hidden themes or topics in a collection of documents. Think of it as a way to automatically group movie reviews based on similar subjects.
 """)
 
+st.divider()
+
 st.subheader("Why Use LDA?")
 st.write("""
 LDA is useful when:
@@ -12,6 +14,8 @@ LDA is useful when:
 * You want to understand the main themes or topics within the data.
 * You don't know beforehand what those themes might be (LDA discovers them for you).
 """)
+
+st.divider()
 
 # Section 2: LDA Code Example (Simplified)
 st.header("LDA in Action (Simplified)")
@@ -86,6 +90,8 @@ action fight guy guys cool
 """)
 
 st.write("This code snippet demonstrates the basic steps involved in training an LDA model and extracting topics.")
+
+st.divider()
 
 # Section 3: Interpreting LDA Results
 st.header("Interpreting LDA Results")

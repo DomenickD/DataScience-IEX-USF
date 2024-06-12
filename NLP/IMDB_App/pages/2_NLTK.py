@@ -8,6 +8,7 @@ NLTK is like a professional organizer for your text:
 * **Reliable:**  The functions are tested and optimized.
 * **Consistent:**  Everyone gets the same results using NLTK.
 """)
+st.divider()
 
 # Section 4: Showcasing NLTK's Advantages (with Examples)
 st.header("NLTK in Action: Easy vs. Manual")
