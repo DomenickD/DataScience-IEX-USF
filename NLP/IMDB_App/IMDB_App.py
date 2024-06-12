@@ -7,7 +7,7 @@ st.divider()
 
 st.subheader("About the data")
 st.write("""
-The IMDB dataset is a collection of 50,000 movie reviews from the Internet Movive Database (IMDB) website. The dataset is balanced, with 25,000 positive and 25,000 negative reviews. 
+The IMDB dataset is a collection of 50,000 movie reviews from the Internet Movie Database (IMDB) website. The dataset is balanced, with 25,000 positive and 25,000 negative reviews. 
          
 The primary use of the IMDB dataset is to train and evaluate models that can determine the sentiment expressed in a piece of text (e.g., movie review, product review). The binary labels make it suitable for supervised learning tasks.
          
@@ -27,7 +27,8 @@ st.divider()
 
 st.subheader("Word Cloud of all the text")
 st.image("Pictures/wordcloud_all.png", width=800) #may change width in final
-
+st.caption("The larger the word, the more frequently it appears.")
+st.divider()
 st.subheader("Honorable Mentions from the data")
 st.write("""
 df["review"][610][:300]
