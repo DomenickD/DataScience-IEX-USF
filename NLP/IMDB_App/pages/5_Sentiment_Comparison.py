@@ -42,7 +42,7 @@ The text for processing: {sentence}
 | Stopwords | {filtered_tokens} | [example, how, works, it, clean] (removed: is, an, of, nlp, numbers, this, can) |
 | POS Tagging | {pos_word} | [this (DT), is (VBZ), an (DT), example (NN), of (IN), how (WRB), nlp (NNP), works~! (.!), can (MD), it (PRP), clean (VB), numbers? (?) 1 (CD) 2 (CD) 3 (CD) % (%), ^ (X), & (&), * (*), :) (:)] |
 | Stemming | {stemmed_words} | [this, is, an, exampl, how, nlp, work, can, it, clea, numb] (removed: example, of, nlp, works~!, clean, numbers?) |
-| Lemitzation | {lemmatized_words} | [this, be, a, way, nlp, do, something, can, you, make, clean, number] (removed: is, an, exampl, how, work, it, clea, numb) |
+| Lemmatization | {lemmatized_words} | [this, be, a, way, nlp, do, something, can, you, make, clean, number] (removed: is, an, exampl, how, work, it, clea, numb) |
 """)
 st.divider()
 st.subheader("Sentiment Prediction")
