@@ -56,7 +56,7 @@ review_three = 'Good, funny, straightforward story, excellent Nicole Kidman (I a
 st.write(f"""
          
 | Review Original | Model Prediction | LLama (LLM) Prediction | Actual Value |
-|---|---|---| --- |
+|---|---|---|---|
 | {review_one} | Negative | "overwhelmingly NEGATIVE" | 0 (negative) |
 | {review_two} | Negative | "overwhelmingly NEGATIVE" | 0 (negative) |
 | {review_three} | Positive | "POSITIVE" | 1 (positive) |
