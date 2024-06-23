@@ -110,3 +110,21 @@ This app is designed to teach and explain NLP and demonstrate the text preproces
 ![Page_4_4](Pictures/Page_4_4.png)
 
 ---
+
+![Page_5_1](Pictures/Page_5_1.png)
+
+---
+
+![Page_6_1](Pictures/Page_6_1.png)
+
+---
+
+![Page_6_2](Pictures/Page_6_2.png)
+
+
+![Page_6_3](Pictures/Page_6_3.png)
+
+
+![Page_6_4](Pictures/Page_6_4.png)
+
+---

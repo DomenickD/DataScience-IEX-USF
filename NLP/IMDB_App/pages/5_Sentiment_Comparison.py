@@ -1,78 +1,3 @@
-# import streamlit as st
-# import nltk
-# from nltk.tokenize import word_tokenize
-# from nltk.corpus import stopwords
-# from nltk import pos_tag
-# from openai import OpenAI
-# import pandas as pd
-
-# # Initialize the OpenAI client pointing to the local LM Studio server
-# client = OpenAI(base_url="http://localhost:1234/v1", api_key="lm-studio")
-
-# # Title and introduction
-# st.title("NLTK vs AI Preprocessing Comparison")
-# st.write("Enter a sentence to compare preprocessing steps using NLTK and AI supported by LM Studio.")
-
-# # Function to preprocess text using NLTK
-# def nltk_preprocess(text):
-#     tokens = word_tokenize(text)
-#     stop_words = set(stopwords.words('english'))
-#     filtered_tokens = [word for word in tokens if word.lower() not in stop_words]
-#     pos_tags = pos_tag(filtered_tokens)
-#     return {
-#         "tokens": tokens,
-#         "filtered_tokens": filtered_tokens,
-#         "pos_tags": pos_tags
-#     }
-
-# # Function to preprocess text using AI supported by LM Studio
-# def ai_preprocess(text):
-#     response = client.chat.completions.create(
-#         model="lmstudio-community/Meta-Llama-3-8B-Instruct-GGUF",
-#         messages=[
-#             {"role": "system", "content": "You are a code assistant."},
-#             {"role": "user", "content": f"Preprocess the following text and provide tokens, filtered tokens without stopwords, and part of speech tags: '{text}'"}
-#         ],
-#         temperature=0.7,
-#     )
-#     result = response.choices[0].message.content
-#     return eval(result)  # Assuming the AI returns a Python dictionary as a string
-
-# # Accept user input
-# sentence = st.text_input("Enter a sentence:")
-
-# if sentence:
-#     # Preprocess the sentence using NLTK
-#     nltk_results = nltk_preprocess(sentence)
-
-#     # Preprocess the sentence using AI supported by LM Studio
-#     try:
-#         ai_results = ai_preprocess(sentence)
-#     except Exception as e:
-#         st.error(f"An error occurred: {e}") #I want to use this if we can catch any errors. for presentation, I want to use a set string.
-#         ai_results = {"tokens": [], "filtered_tokens": [], "pos_tags": []}
-
-#     # Display the results side by side in a table
-#     # df = pd.DataFrame({
-#     #     "NLTK": ["Tokens", "Filtered Tokens", "POS Tags"],
-#     #     "NLTK Results": [nltk_results["tokens"], nltk_results["filtered_tokens"], nltk_results["pos_tags"]],
-#     #     "AI": ["Tokens", "Filtered Tokens", "POS Tags"],
-#     #     "AI Results": [ai_results.get("tokens", []), ai_results.get("filtered_tokens", []), ai_results.get("pos_tags", [])]
-#     # })
-
-#         # Convert lists to strings for display in the DataFrame
-#     def stringify(items):
-#         return ', '.join(str(item) for item in items)
-    
-#     df = pd.DataFrame({
-#         "Step": ["Tokens", "Filtered Tokens", "POS Tags"],
-#         "NLTK Results": [stringify(nltk_results["tokens"]), stringify(nltk_results["filtered_tokens"]), stringify(nltk_results["pos_tags"])],
-#         "AI Results": [stringify(ai_results.get("tokens", [])), stringify(ai_results.get("filtered_tokens", [])), stringify(ai_results.get("pos_tags", []))]
-#     })
-
-
-#     st.table(df)
-
 import streamlit as st
 import pandas as pd
 import nltk
@@ -130,15 +55,15 @@ review_three = 'Good, funny, straightforward story, excellent Nicole Kidman (I a
 
 st.write(f"""
          
-| Review Original | Model Prediction | LLama (LLM) Prediction |
-|---|---|---|
-| {review_one} | Negative | "overwhelmingly NEGATIVE" |
-| {review_two} | Negative | "overwhelmingly NEGATIVE" |
-| {review_three} | Positive | "POSITIVE" |
+| Review Original | Model Prediction | LLama (LLM) Prediction | Actual Value |
+|---|---|---| --- |
+| {review_one} | Negative | "overwhelmingly NEGATIVE" | 0 (negative) |
+| {review_two} | Negative | "overwhelmingly NEGATIVE" | 0 (negative) |
+| {review_three} | Positive | "POSITIVE" | 1 (positive) |
 
          
 """)
-st.caption("What do the predictions mean?")
+st.caption("Negative or 0 indicates a bad review sentiment. Positive or 1 indicates a good review sentiment.")
 
 st.divider()
 
