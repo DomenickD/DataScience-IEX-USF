@@ -67,15 +67,21 @@ st.caption("Negative or 0 indicates a bad review sentiment. Positive or 1 indica
 
 st.divider()
 
+st.subheader("Summary Statistics")
+
 st.write("""The sentiment analysis is a simple use case for NLP so we see that the LLama LLM performed the same as our trained model when it came down to a binary classifcation (prediction).
 
 On 500 Samples from the 50,000 dataset.
          
 Logistic Regression Accuracy: 0.85
+         
 LLM Accuracy: 0.9489795918367347
+         
+         
          
 On 2,000 Samples from the 50,000 dataset.
          
 Logistic Regression Accuracy: 0.8225
+         
 LLM Accuracy: 0.959785522788203
 """)
