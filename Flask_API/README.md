@@ -24,6 +24,8 @@ The purpose of this API is to provide a trained Logistic Regression Model for Se
 
 ![Works](Pictures/workingv1.png)
 
+![Works2](Pictures/test_request.png)
+
 ![Postman](Pictures/Postman.png)
 
 ![CURL](Pictures/curl.png)
