@@ -21,7 +21,6 @@ def index():
 #         return jsonify({"response": "Get request called"})
 
 
-
 @app.route('/api/predict', methods=['POST'])
 def make_prediction():
     try:
