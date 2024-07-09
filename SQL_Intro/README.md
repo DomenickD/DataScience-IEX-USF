@@ -44,3 +44,9 @@ python converted_script.py
 - Follow the prompts to specify the file type, table name, etc.
 - Review the output in your terminal (query results displayed in a Pandas DataFrame).
 
+###
+
+Find this code and change it to support your project.
+
+![Change_This](Pictures/Change_This.png)
+
