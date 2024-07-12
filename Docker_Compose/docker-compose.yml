@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  db:  # Define the SQLite database service
+    image: busybox:latest  # Use a minimal image for just holding the file
+    volumes:
+      - ./database:/data  # Mount the database directory
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./backend:/app
+    environment:
+      - FLASK_APP=app.py
+      - FLASK_ENV=development
+      - DATABASE_URL=sqlite:////database/my_database.db  # Use the mounted volume path
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./frontend:/app
+    environment:
+      - FLASK_APP=app.py
+    depends_on:
+      - backend
