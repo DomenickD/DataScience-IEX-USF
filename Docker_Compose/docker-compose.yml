@@ -1,33 +1,40 @@
-version: '3.8'
+version: '3'
 
 services:
-  db:  # Define the SQLite database service
-    image: busybox:latest  # Use a minimal image for just holding the file
-    volumes:
-      - ./database:/data  # Mount the database directory
-
-  backend:
+  sqlite-db:
     build:
-      context: ./backend
+      context: .
+      dockerfile: ./database/Dockerfile
+    container_name: sqlite-container
+    volumes:
+      - ./titanic_data.db:/app/titanic_data.db
+
+  flask-app:
+    build:
+      context: ./flask_app
       dockerfile: Dockerfile
+    container_name: flask-container
     ports:
       - "5000:5000"
+    depends_on:
+      - sqlite-db
     volumes:
-      - ./backend:/app
-    environment:
-      - FLASK_APP=app.py
-      - FLASK_ENV=development
-      - DATABASE_URL=sqlite:////database/my_database.db  # Use the mounted volume path
+      - ./flask_app:/app
+      - ./titanic_data.db:/app/titanic_data.db
 
-  frontend:
+  streamlit-app:
     build:
-      context: ./frontend
+      context: ./streamlit_app
       dockerfile: Dockerfile
+    container_name: streamlit-container
     ports:
       - "8501:8501"
-    volumes:
-      - ./frontend:/app
-    environment:
-      - FLASK_APP=app.py
+    develop:
+      watch:
+        - action: sync
+          path: .
+          target: /code
     depends_on:
-      - backend
+      - flask-app
+    volumes:
+      - ./streamlit_app:/app
