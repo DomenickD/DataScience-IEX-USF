@@ -14,7 +14,7 @@ if table_selected:
 
 query = st.text_area(label= 'Enter your SQL query here:', value = query)
 
-st.write(query)
+# st.write(query)
 
 if st.button('Submit'):
     response = requests.post('http://flask-container:5000/query', json={'query': query})
