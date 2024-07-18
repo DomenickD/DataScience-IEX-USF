@@ -58,30 +58,30 @@ docker-compose down
 
 ## Demo
 
-![address](Pictures\address.png)
+![address](Pictures/address.png)
 
 This is the address to visit and see teh front end when the containers are loaded and up.
 
-![main_page](Pictures\main_page.png)
+![main_page](Pictures/main_page.png)
 
 This is the page that displays when you reached the frontend address in your browser.
 
-![select_box](Pictures\select_box.png)
+![select_box](Pictures/select_box.png)
 
 Select this box to test out the query box with a preloaded query. 
 
-![results](Pictures\results.png)
+![results](Pictures/results.png)
 
 See results below. 
 
-![LIMIT5](Pictures\LIMIT5.png)
+![LIMIT5](Pictures/LIMIT5.png)
 
 Add or change the query and hit submit to see the results in real time. 
 
 ### Enjoy!
 
 
-![yaml](Pictures\yaml.png)
+![yaml](Pictures/yaml.png)
 
 The Docker-Compose.yaml for reference. 
 
