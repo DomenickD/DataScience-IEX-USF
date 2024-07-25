@@ -1,0 +1,32 @@
+services:
+  database: 
+    build:
+      context: ./database
+      dockerfile: Dockerfile
+    container_name: full-database
+    volumes:
+      - ./database/RA_projects.db:/app/RA_projects.db
+
+  backend: 
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: flask_route
+    ports:
+      - 5000:5000
+    volumes:
+      - ./backend:/app
+      - ./database/RA_projects.db:/app/RA_projects.db
+
+  frontend: 
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: streamlit_frontend
+    ports:
+      - 8501:8501
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+      - ./database/RA_projects.db:/app/RA_projects.db
