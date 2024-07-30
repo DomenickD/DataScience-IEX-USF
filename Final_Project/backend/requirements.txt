@@ -1,1 +1,9 @@
 Flask
+flask-cors
+nltk
+numpy
+pandas
+scikit-learn
+tensorflow
+pandas
+xgboost
