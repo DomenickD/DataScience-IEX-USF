@@ -2,7 +2,19 @@ import streamlit as st
 import requests
 import pandas as pd
 
-st.title('Database Query App')
+st.title('Get to know the data!')
+
+# Add a button in the sidebar
+if st.sidebar.button('Scroll to Top'):
+    # Use Streamlit's ability to render HTML and embed JavaScript to scroll to the top
+    st.markdown(
+        """
+        <script>
+        document.documentElement.scrollTop = 0;
+        </script>
+        """,
+        unsafe_allow_html=True
+    )
 
 #I am going to define functions for cleaner coding in my if statments for the submit button
 def titanic_display():
@@ -111,7 +123,7 @@ This plot represents the distribution of survivors on board.
 
     # DBSCAN
     st.image("Pictures/DBSCAN.png")
-    st.caption("Here is the attempt at applying DBSCAN to the Titanic Dataset. No noticable trends.")
+    st.caption("Here is the attempt at applying DBSCAN to the Titanic Dataset. No noticeable trends.")
 
     st.divider()
 
@@ -136,15 +148,6 @@ def housing_display():
         ---
 
         """)
-    st.subheader("Methodology")
-    st.write("Approaching this dataset, we wanted to find out what type of Clusters were present so we could best see hwat features correlate with eachother.")
-    st.write("To this end, we performed unsupervised learning as well as a correlation matrix as seen below.")
-    st.image("Pictures/Elbow_Plot.png")
-    st.caption("This shows the clusters. We call this an elbow plot because a well defined elbow is a roadmap to the optimal number of clusters vs. distortions.")
-    st.divider()
-    st.image("Pictures/Heatmap.png")
-    st.caption("This is the heatmap. Our task is to predict Sale Price based on the data so we are only focused on what has a strong negative or positive correlation with the Sale Price. This is denoted by a number being closer to positive or negative 1.")
-    st.divider()
 
     st.write("""
         ## Columns Used in Analysis
@@ -181,24 +184,81 @@ def housing_display():
         - R-Squared: 0.8950
 
         """)
+    st.caption("This shows an increase in our performance by 1.78%.")
     st.divider()
 
     st.image("Pictures/relation_abvgrdliv_to_saleprice.png")
     st.caption("This helps to visualize if there's a positive correlation (and whether it's linear or not).")
 
     st.divider()
-    st.image("Pictures/Learning_Curve.png")
-    st.caption("The pattern shown on this raph shows a high variance.")
     
+    st.image("Pictures/Heatmap.png")
+    st.caption("This is the heatmap. Our task is to predict Sale Price based on the data so we are only focused on what has a strong negative or positive correlation with the Sale Price. This is denoted by a number being closer to positive or negative 1.")
 
+    st.divider()
+    st.image("Pictures/Learning_Curve.png")
+    st.caption("The pattern shown on this graph shows a high variance.")
+
+    st.divider()
+    
+    st.image("Pictures/Elbow_Plot.png")
+    st.caption("This shows the clusters. We call this an elbow plot because a well defined elbow is a roadmap to the optimal number of clusters vs. distortions.")
+
+    st.divider()
+    
 def movie_display():
-    pass
+    st.header("The IMDB Dataset for Natural Language Processing")
+
+    st.divider()
+
+    st.subheader("About the data - The IMDB Dataset for Natural Language Processing")
+
+    st.caption("Before there was chatbots, there was Natural Language Processing...")
+    st.write("""
+    The IMDB dataset is a collection of 50,000 movie reviews from the Internet Movie Database (IMDB) website. The dataset is balanced, with 25,000 positive and 25,000 negative reviews. 
+            
+    The primary use of the IMDB dataset is to train and evaluate models that can determine the sentiment expressed in a piece of text (e.g., movie review, product review). The binary labels make it suitable for supervised learning tasks.
+            
+    The dataset consists of a Review Text column and a Sentiment Label column.
+            
+    Some challenges Challenges and Considerations here include:
+
+    - Sarcasm and Subtlety: Some reviews may contain sarcasm or express sentiment in subtle ways, making accurate classification challenging.
+            
+    - Data Bias: The dataset may contain biases inherent in the original reviews, which could affect model performance.
+            
+    - Pre-processing: Raw reviews often require preprocessing steps like tokenization, stop-word removal, and potentially stemming or lemmatization before being used in models.
+            
+    """)
+
+    st.divider()
+
+    st.subheader("About the model:")
+
+    st.write("""
+    We used TFIDF (Term Frequency - Inverse Document Frequency) to take the preprocessed text and convert it into numbers so the machine learning model could read it.
+
+    We then used a logistic regression model to train on the new numerical representations of this preprocessed data. 
+            
+    Doing this resulted in an accuracy in predictions for sentiment of **89.32%**.
+             
+    The best part? (We get to play with the model in this streamlit app!)
+    """)
+    st.divider()
+    st.image("Pictures/Confusion_Matrix.png")
+    st.caption("This confusion matrix shows us that the model identified reviews correctly (with its predictions) 89.32% of the time.")
+
+    st.divider()
+
+    st.subheader("Word Cloud of all the text")
+    st.image("Pictures/wordcloud_all.png", width=800) 
+    st.caption("The larger the word, the more frequently it appears.")
+    st.divider()
 
 # Radio buttons for single table selection
 table_option = st.radio("Select dataset:", 
-                       ("Titanic", "Housing", "Movie"))
-                        # , "MNIST"
-                        # ))
+                       ("Titanic", "Housing", "Movie"),
+                       key='table_option')
 
 query = ""
 if table_option == "Titanic":
@@ -207,13 +267,8 @@ elif table_option == "Housing":
     query = "SELECT * FROM housing;" 
 elif table_option == "Movie":
     query = "SELECT * FROM movie LIMIT 50;"   
-# elif table_option == "MNIST":
-#     query = "SELECT * FROM mnist;"
-
 
 query = st.text_area(label= 'Enter your SQL query here:', value = query)
-
-# st.write(query)
 
 if st.button('Submit'):
     response = requests.post('http://flask_route:5000/query', json={'query': query})
@@ -225,8 +280,6 @@ if st.button('Submit'):
             columns = result.get("columns", [])
             # Convert the JSON response to a pandas DataFrame with column names
             df = pd.DataFrame(data, columns=columns)
-            # st.dataframe(df)
-            ### Think of a way to display results number that were retrived by the query
 
             ### Make Functions to display
             if table_option == "Titanic":
