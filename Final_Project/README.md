@@ -81,41 +81,90 @@ Include screenshots of different sections of the application here:
 
 2. **Query Tool - Titanic**
    ![titanic_1](Pictures/titanic_1.png)
-   ![titanic_1](Pictures/titanic_2.png)
-   ![titanic_1](Pictures/titanic_3.png)
-   ![titanic_1](Pictures/titanic_4.png)
-   ![titanic_1](Pictures/titanic_5.png)
-   ![titanic_1](Pictures/titanic_6.png)
-   ![titanic_1](Pictures/titanic_7.png)
-   ![titanic_1](Pictures/titanic_8.png)
-   ![titanic_1](Pictures/titanic_9.png)
-   ![titanic_1](Pictures/titanic_10.png)
-   ![titanic_1](Pictures/titanic_11.png)
-   ![titanic_1](Pictures/titanic_12.png)
+   ![titanic_2](Pictures/titanic_2.png)
+   ![titanic_3](Pictures/titanic_3.png)
+   ![titanic_4](Pictures/titanic_4.png)
+   ![titanic_5](Pictures/titanic_5.png)
+   ![titanic_6](Pictures/titanic_6.png)
+   ![titanic_7](Pictures/titanic_7.png)
+   ![titanic_8](Pictures/titanic_8.png)
+   ![titanic_9](Pictures/titanic_9.png)
+   ![titanic_10](Pictures/titanic_10.png)
+   ![titanic_11](Pictures/titanic_11.png)
+   ![titanic_12](Pictures/titanic_12.png)
 
 ---
 
 3. **Query Tool - Housing**
    ![housing_1](Pictures/housing_1.png)
-
-2. **Ensemble Techniques**
-   ![Ensemble Techniques](path_to_ensemble_techniques_screenshot)
-
-3. **Unsupervised Techniques**
-   ![Unsupervised Techniques](path_to_unsupervised_techniques_screenshot)
-
-4. **Prediction Tool - MNIST**
-   ![MNIST Prediction Tool](path_to_mnist_tool_screenshot)
-
-5. **Prediction Tool - Sentiment Analysis**
-   ![Sentiment Analysis Tool](path_to_sentiment_analysis_tool_screenshot)
-
-6. **Prediction Tool - Titanic**
-   ![Titanic Prediction Tool](path_to_titanic_tool_screenshot)
-
-7. **Prediction Tool - Housing**
-   ![Housing Price Tool](path_to_housing_price_tool_screenshot)
+   ![housing_2](Pictures/housing_2.png)
+   ![housing_3](Pictures/housing_3.png)
+   ![housing_4](Pictures/housing_4.png)
+   ![housing_5](Pictures/housing_5.png)
+   ![housing_6](Pictures/housing_6.png)
+   ![housing_7](Pictures/housing_7.png)
+   ![housing_8](Pictures/housing_8.png)
+   ![housing_9](Pictures/housing_9.png)
 
 ---
 
-Feel free to contribute to this project by submitting issues or pull requests!
+4. **Query Tool - Movie Data (IMDB)**
+   ![movie_1](Pictures/movie_1.png)
+   ![movie_2](Pictures/movie_2.png)
+   ![movie_3](Pictures/movie_3.png)
+   ![movie_4](Pictures/movie_4.png)
+
+---
+
+5. **Neural Network Comparison**
+   ![nn_1](Pictures/nn_1.png)
+   ![nn_2](Pictures/nn_2.png)
+   ![nn_3](Pictures/nn_3.png)
+   ![nn_4](Pictures/nn_4.png)
+   ![nn_5](Pictures/nn_5.png)
+   ![nn_6](Pictures/nn_6.png)
+
+---
+
+6. **Ensemble Techniques**
+   ![ensemble_1](Pictures/ensemble_1.png)
+   ![ensemble_2](Pictures/ensemble_2.png)
+   ![ensemble_3](Pictures/ensemble_3.png)
+   ![ensemble_4](Pictures/ensemble_4.png)
+
+---
+
+7. **Unsupervised Techniques**
+   ![unsupervised_1](Pictures/unsupervised_1.png)
+   ![unsupervised_2](Pictures/kmeans.gif)
+   ![unsupervised_3](Pictures/unsupervised_3.png)
+
+---
+8. **Prediction Tool - Titanic**
+   ![predict_1](Pictures/predict_1.png)
+   ![predict_2](Pictures/predict_2.png)
+   ![predict_3](Pictures/predict_3.png)
+   ![predict_4](Pictures/predict_4.png)
+
+---
+
+9. **Prediction Tool - Housing**
+   ![predict_home_1](Pictures/predict_home_1.png)
+   ![predict_home_2](Pictures/predict_home_2.png)
+   ![predict_home_3](Pictures/predict_home_3.png)
+
+---
+
+10. **Prediction Tool - Sentiment Analysis**
+   ![sentiment_1](Pictures/sentiment_1.png)
+   ![sentiment_2](Pictures/sentiment_2.png)
+
+---
+
+11. **Prediction Tool - MNIST**
+   ![cnn_1](Pictures/cnn_1.png)
+   ![cnn_2](Pictures/cnn_2.png)
+   ![cnn_3](Pictures/cnn_3.png)
+
+
+---
