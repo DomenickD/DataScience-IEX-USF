@@ -131,6 +131,8 @@ def housing_display():
     st.header("The Ames Housing Data from Ames, Iowa")
     st.divider()
     st.image("Pictures/Ames_Downtown.png")
+    st.caption("Downtown Ames, Iowa in the summer.")
+    st.caption("Source: https://www.worldatlas.com/cities/ames-iowa.html")
     st.divider()
     st.write("""
         ## Data Background
