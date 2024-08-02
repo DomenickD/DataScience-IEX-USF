@@ -85,25 +85,25 @@ def titanic_display():
 
     97.85%.
 
+             
+    An increase of 0.96%.
     """)
 
     st.divider()
 
 
-    st.image("Pictures/Distro_by_sex.png")
-    st.caption("This shows a side by side of the amount of males to females who survived the Titanic and did not survive.")
+    # st.image("Pictures/Distro_by_sex.png")
+    # st.caption("This shows a side by side of the amount of males to females who survived the Titanic and did not survive.")
 
-    st.divider()
+    # st.divider()
 
-    st.image("Pictures/Heatmap copy.png")
-    st.caption("This Heatmap shows the correlation between features and 'Survived'.")
 
-    st.divider()
 
     st.image("Pictures/Survival_Distro_by_Class.png")
     # st.caption("Survival status of the passenger (0 = No, 1 = Yes).")
 
     st.divider()
+
 
     st.image("Pictures/survival_dist.png")
     st.caption("""
@@ -114,7 +114,11 @@ This plot represents the distribution of survivors on board.
 - Green represents those who survived.""")
 
     st.divider()
+    
+    st.image("Pictures/Heatmap copy.png")
+    st.caption("This Heatmap shows the correlation between features and 'Survived'.")
 
+    st.divider()
     #learning curve
     st.image("Pictures/Learning_Curve copy.png")
     st.caption("This is the learning curve for the model.")

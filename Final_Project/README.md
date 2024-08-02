@@ -86,7 +86,7 @@ Include screenshots of different sections of the application here:
    ![titanic_4](Pictures/titanic_4.png)
    ![titanic_5](Pictures/titanic_5.png)
    ![titanic_6](Pictures/titanic_6.png)
-   ![titanic_7](Pictures/titanic_7.png)
+   <!-- ![titanic_7](Pictures/titanic_7.png) -->
    ![titanic_8](Pictures/titanic_8.png)
    ![titanic_9](Pictures/titanic_9.png)
    ![titanic_10](Pictures/titanic_10.png)
