@@ -13,8 +13,8 @@ This project demonstrates how to containerize a web application using Flask for 
 
 1. Clone this repository.
 ```bash
-git clone https://your-repository-url.git
-cd your-repository-name
+git clone https://github.com/DomenickD/DataScience-IEX-USF/tree/main/Docker_Compose.git
+cd Docker_Compose
 ```
 
 2. Build and start the services using Docker Compose:
