@@ -9,21 +9,27 @@ if st.button("Commence Battle"):
 
 st.subheader("About the classic MNIST dataset...")
 
-st.write("""The MNIST dataset is a collection of 70,000 handwritten digits (0-9) that are used to train and test machine 
+st.write(
+    """The MNIST dataset is a collection of 70,000 handwritten digits (0-9) that are used to train and test machine 
          learning algorithms. The dataset is divided into 60,000 training images and 10,000 test images. Each image is a 28x28
-         pixel grayscale image.""")
+         pixel grayscale image."""
+)
 
 st.divider()
 
 st.subheader("The MNIST Dataset at a glance")
 st.image("""Pictures/MNIST_full.png""")
-st.caption("This sample shows the pattern of what type of data is in our dataset. Please note it is already cleaned and gray scale. This image is from: https://towardsdatascience.com/solve-the-mnist-image-classification-problem-9a2865bcf52a")
+st.caption(
+    "This sample shows the pattern of what type of data is in our dataset. Please note it is already cleaned and gray scale. This image is from: https://towardsdatascience.com/solve-the-mnist-image-classification-problem-9a2865bcf52a"
+)
 
 st.divider()
 
 st.subheader("The partial MNIST Dataset")
 st.image("Pictures/MNIST_part.png")
-st.caption("This is a picture of a smaller sample of the dataset so it is easier to see from: https://datasets.activeloop.ai/docs/ml/datasets/mnist/")
+st.caption(
+    "This is a picture of a smaller sample of the dataset so it is easier to see from: https://datasets.activeloop.ai/docs/ml/datasets/mnist/"
+)
 
 st.divider()
 
@@ -36,7 +42,8 @@ col1, col2 = st.columns(2)
 with col1:
     st.header("Tensorflow")
     st.caption("The length of code for the Tensorflow Neural Network.")
-    st.code("""
+    st.code(
+        """
 import tensorflow as tf
 mnist = tf.keras.datasets.mnist
 
@@ -57,12 +64,15 @@ model.compile(optimizer='adam',
 model.fit(x_train, y_train, epochs=5)
 model.evaluate(x_test, y_test)
 
-""", language="Python")
+""",
+        language="Python",
+    )
 
 with col2:
     st.header("Pytorch")
     st.caption("The length of code for the Pytorch Neural Network.")
-    st.code("""
+    st.code(
+        """
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -121,9 +131,12 @@ with torch.no_grad():
 
 print('Test Accuracy: {:.2f}%'.format(100 * correct / total))
 
-""", language="Python")
-    
-st.markdown("""
+""",
+        language="Python",
+    )
+
+st.markdown(
+    """
 ### Tensorflow vs. Pytorch
             
 - **TensorFlow**: TensorFlow is often favored for its concise syntax and ease of implementation. It provides a more streamlined approach, allowing developers to quickly build and deploy models with less code. This makes it an excellent choice for projects where rapid development and deployment are key.
@@ -132,4 +145,5 @@ st.markdown("""
 
 - **Pros and Cons**: TensorFlow's simplicity comes at the cost of reduced flexibility, while PyTorch's extensive customizability can lead to longer development times. The choice between the two often depends on the specific needs of the project.
 
-""")
+"""
+)

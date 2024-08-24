@@ -2,10 +2,10 @@ import streamlit as st
 import requests
 import pandas as pd
 
-st.title('Get to know the data!')
+st.title("Get to know the data!")
 
 # Add a button in the sidebar
-if st.sidebar.button('Scroll to Top'):
+if st.sidebar.button("Scroll to Top"):
     # Use Streamlit's ability to render HTML and embed JavaScript to scroll to the top
     st.markdown(
         """
@@ -13,20 +13,24 @@ if st.sidebar.button('Scroll to Top'):
         document.documentElement.scrollTop = 0;
         </script>
         """,
-        unsafe_allow_html=True
+        unsafe_allow_html=True,
     )
 
-#I am going to define functions for cleaner coding in my if statments for the submit button
+
+# I am going to define functions for cleaner coding in my if statments for the submit button
 def titanic_display():
-    st.write("""
-    # Titanic Classification Dataset""")
+    st.write(
+        """
+    # Titanic Classification Dataset"""
+    )
     st.divider()
 
     st.image("Pictures/Titanic.png")
     st.caption("Source: https://cdn.britannica.com/79/4679-050-BC127236/Titanic.jpg")
     st.divider()
 
-    st.write("""
+    st.write(
+        """
     ## Overview of this project from Kaggle
     The sinking of the Titanic is one of the most infamous shipwrecks in history.
 
@@ -35,24 +39,30 @@ def titanic_display():
     While there was some element of luck involved in surviving, it seems some groups of people were more likely to survive than others.
 
     In this challenge, we ask you to build a predictive model that answers the question: “what sorts of people were more likely to survive?” using passenger data (ie name, age, gender, socio-economic class, etc).
-    """)
+    """
+    )
 
-    st.write("""
+    st.write(
+        """
     ---
     ## Disclaimer about the data
     This dataset does not include all of the PEOPLE from the actual Titanic. 
     There are 1309 rows of data for *passengers* in this Kaggle Dataset. There were 2240 total Passengers **and** Crew.
     As a result, the 931 crew members are not accounted for. 
-    """)
-    st.write("""
+    """
+    )
+    st.write(
+        """
     ---
     ## Problem Statement
     The goal of this project is to develop a predictive model that accurately identifies factors influencing passenger survival rates during the tragic sinking of the RMS Titanic. 
             By analyzing historical passenger data, we seek to uncover patterns and relationships between individual characteristics 
             (such as age, gender, socio-economic class, cabin location, etc.) and their likelihood of survival.
-            """)
+            """
+    )
 
-    st.write("""
+    st.write(
+        """
     ---       
     ## List of Column Names and what the values represent
             
@@ -71,10 +81,12 @@ def titanic_display():
     | Cabin          | The passenger's cabin number (if recorded).                                    |
     | Embarked       | The passenger's port of embarkation (C = Cherbourg, Q = Queenstown, S = Southampton). |
     ---
-    """)
+    """
+    )
 
     st.subheader("Model Details")
-    st.write("""
+    st.write(
+        """
     This data was run against multiple models and multiple normalization methods. The highest ratings were from the logistic regression model with a standardized MinMaxScalar provided by Sci-kit learn.
 
     Model Accuracy before Hyperparameter Tuning:
@@ -87,39 +99,38 @@ def titanic_display():
 
              
     An increase of 0.96%.
-    """)
+    """
+    )
 
     st.divider()
-
 
     # st.image("Pictures/Distro_by_sex.png")
     # st.caption("This shows a side by side of the amount of males to females who survived the Titanic and did not survive.")
 
     # st.divider()
 
-
-
     st.image("Pictures/Survival_Distro_by_Class.png")
     # st.caption("Survival status of the passenger (0 = No, 1 = Yes).")
 
     st.divider()
 
-
     st.image("Pictures/survival_dist.png")
-    st.caption("""
+    st.caption(
+        """
 This plot represents the distribution of survivors on board.
 
 - Red represents those who did NOT survive.
                
-- Green represents those who survived.""")
+- Green represents those who survived."""
+    )
 
     st.divider()
-    
+
     st.image("Pictures/Heatmap copy.png")
     st.caption("This Heatmap shows the correlation between features and 'Survived'.")
 
     st.divider()
-    #learning curve
+    # learning curve
     st.image("Pictures/Learning_Curve copy.png")
     st.caption("This is the learning curve for the model.")
 
@@ -127,9 +138,12 @@ This plot represents the distribution of survivors on board.
 
     # DBSCAN
     st.image("Pictures/DBSCAN.png")
-    st.caption("Here is the attempt at applying DBSCAN to the Titanic Dataset. No noticeable trends.")
+    st.caption(
+        "Here is the attempt at applying DBSCAN to the Titanic Dataset. No noticeable trends."
+    )
 
     st.divider()
+
 
 def housing_display():
     st.header("The Ames Housing Data from Ames, Iowa")
@@ -138,7 +152,8 @@ def housing_display():
     st.caption("Downtown Ames, Iowa in the summer.")
     st.caption("Source: https://www.worldatlas.com/cities/ames-iowa.html")
     st.divider()
-    st.write("""
+    st.write(
+        """
         ## Data Background
 
         The Ames Housing Dataset was compiled by Dean De Cock (Iowa State University) in 2011 for use in research and education.
@@ -153,9 +168,11 @@ def housing_display():
                 
         ---
 
-        """)
+        """
+    )
 
-    st.write("""
+    st.write(
+        """
         ## Columns Used in Analysis
 
         | Column Name | Data Type | Description |
@@ -170,8 +187,10 @@ def housing_display():
         | SalePrice | Continuous | Sale price ($) |
 
         ***
-        """)
-    st.write(f"""
+        """
+    )
+    st.write(
+        f"""
         ## Model Summary
         - **Model Type**: I'm using an XGBoost Regressor model. This is a powerful type of gradient boosting algorithm that builds decision trees in an ensemble to make predictions. It's known for its accuracy and ability to handle a wide variety of data types.
 
@@ -189,29 +208,37 @@ def housing_display():
         - Mean Absolute Error : 18770.51
         - R-Squared: 0.8950
 
-        """)
+        """
+    )
     st.caption("This shows an increase in our performance by 1.78%.")
     st.divider()
 
     st.image("Pictures/relation_abvgrdliv_to_saleprice.png")
-    st.caption("This helps to visualize if there's a positive correlation (and whether it's linear or not).")
+    st.caption(
+        "This helps to visualize if there's a positive correlation (and whether it's linear or not)."
+    )
 
     st.divider()
-    
+
     st.image("Pictures/Heatmap.png")
-    st.caption("This is the heatmap. Our task is to predict Sale Price based on the data so we are only focused on what has a strong negative or positive correlation with the Sale Price. This is denoted by a number being closer to positive or negative 1.")
+    st.caption(
+        "This is the heatmap. Our task is to predict Sale Price based on the data so we are only focused on what has a strong negative or positive correlation with the Sale Price. This is denoted by a number being closer to positive or negative 1."
+    )
 
     st.divider()
     st.image("Pictures/Learning_Curve.png")
     st.caption("The pattern shown on this graph shows a high variance.")
 
     st.divider()
-    
+
     st.image("Pictures/Elbow_Plot.png")
-    st.caption("This shows the clusters. We call this an elbow plot because a well defined elbow is a roadmap to the optimal number of clusters vs. distortions.")
+    st.caption(
+        "This shows the clusters. We call this an elbow plot because a well defined elbow is a roadmap to the optimal number of clusters vs. distortions."
+    )
 
     st.divider()
-    
+
+
 def movie_display():
     st.header("The IMDB Dataset for Natural Language Processing")
 
@@ -220,7 +247,8 @@ def movie_display():
     st.subheader("About the data - The IMDB Dataset for Natural Language Processing")
 
     st.caption("Before there was chatbots, there was Natural Language Processing...")
-    st.write("""
+    st.write(
+        """
     The IMDB dataset is a collection of 50,000 movie reviews from the Internet Movie Database (IMDB) website. The dataset is balanced, with 25,000 positive and 25,000 negative reviews. 
             
     The primary use of the IMDB dataset is to train and evaluate models that can determine the sentiment expressed in a piece of text (e.g., movie review, product review). The binary labels make it suitable for supervised learning tasks.
@@ -235,13 +263,15 @@ def movie_display():
             
     - Pre-processing: Raw reviews often require preprocessing steps like tokenization, stop-word removal, and potentially stemming or lemmatization before being used in models.
             
-    """)
+    """
+    )
 
     st.divider()
 
     st.subheader("About the model:")
 
-    st.write("""
+    st.write(
+        """
     We used TFIDF (Term Frequency - Inverse Document Frequency) to take the preprocessed text and convert it into numbers so the machine learning model could read it.
 
     We then used a logistic regression model to train on the new numerical representations of this preprocessed data. 
@@ -249,35 +279,39 @@ def movie_display():
     Doing this resulted in an accuracy in predictions for sentiment of **89.32%**.
              
     The best part? (We get to play with the model in this streamlit app!)
-    """)
+    """
+    )
     st.divider()
     st.image("Pictures/Confusion_Matrix.png")
-    st.caption("This confusion matrix shows us that the model identified reviews correctly (with its predictions) 89.32% of the time.")
+    st.caption(
+        "This confusion matrix shows us that the model identified reviews correctly (with its predictions) 89.32% of the time."
+    )
 
     st.divider()
 
     st.subheader("Word Cloud of all the text")
-    st.image("Pictures/wordcloud_all.png", width=800) 
+    st.image("Pictures/wordcloud_all.png", width=800)
     st.caption("The larger the word, the more frequently it appears.")
     st.divider()
 
+
 # Radio buttons for single table selection
-table_option = st.radio("Select dataset:", 
-                       ("Titanic", "Housing", "Movie"),
-                       key='table_option')
+table_option = st.radio(
+    "Select dataset:", ("Titanic", "Housing", "Movie"), key="table_option"
+)
 
 query = ""
 if table_option == "Titanic":
     query = "SELECT * FROM titanic;"
 elif table_option == "Housing":
-    query = "SELECT * FROM housing;" 
+    query = "SELECT * FROM housing;"
 elif table_option == "Movie":
-    query = "SELECT * FROM movie LIMIT 50;"   
+    query = "SELECT * FROM movie LIMIT 50;"
 
-query = st.text_area(label= 'Enter your SQL query here:', value = query)
+query = st.text_area(label="Enter your SQL query here:", value=query)
 
-if st.button('Submit'):
-    response = requests.post('http://flask_route:5000/query', json={'query': query})
+if st.button("Submit"):
+    response = requests.post("http://flask_route:5000/query", json={"query": query})
 
     if response.status_code == 200:
         try:
@@ -289,7 +323,7 @@ if st.button('Submit'):
 
             ### Make Functions to display
             if table_option == "Titanic":
-                df = df.drop(columns=['Unnamed: 0'])
+                df = df.drop(columns=["Unnamed: 0"])
                 st.dataframe(df)
                 counting = df["PassengerId"].count()
                 st.write(f"{counting} results are displayed.")
@@ -314,17 +348,3 @@ if st.button('Submit'):
     else:
         st.error(f"Error: Received status code {response.status_code}")
         st.write("Response content:", response.text)
-    
-
-
-
-
-
-
-
-
-
-
-
-
-       

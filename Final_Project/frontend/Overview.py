@@ -5,7 +5,8 @@ st.write("By: Domenick Dobbs")
 
 st.divider()
 
-st.markdown("""
+st.markdown(
+    """
 ### Datasets
 - **IMDB Dataset**: A collection of 50,000 movie reviews for sentiment analysis.
 - **Titanic Dataset**: Passenger data used to predict survival on the Titanic.
@@ -33,4 +34,5 @@ Explore the rudimentary suite of predictive tools:
 
 ---
 
-""")
+"""
+)
