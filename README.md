@@ -12,7 +12,7 @@
 
 - [Docker Compose](https://github.com/DomenickD/DataScience-IEX-USF/tree/main/Docker_Compose) This is the intro to docker compose used for reference on how to build the backend for a project hosted on Docker Compose. 
 
-- [Final Project](https://github.com/DomenickD/DataScience-IEX-USF/tree/main/Final_Project) This is teh Final Project for teh educational portion of the RA Program. Here we see the 3 previous datasets presented in a more non-technical way so all audiences can understand the ideas presented. 
+- [Final Project](https://github.com/DomenickD/DataScience-IEX-USF/tree/main/Final_Project) This is the Final Project for teh educational portion of the RA Program. Here we see the 3 previous datasets presented in a more non-technical way so all audiences can understand the ideas presented. 
 
 - [Legacy](https://github.com/DomenickD/DataScience-IEX-USF/tree/main/Legacy) This is the location for all previous projects that were small or just stepping stones in the RA program that built on larger projects. 
 
@@ -24,4 +24,4 @@
 
 - [Black Lint](https://black.readthedocs.io/en/stable/getting_started.html)
 
-- [SnoarQube](https://docs.sonarsource.com/sonarqube/latest/try-out-sonarqube/)
+- [SonarQube](https://docs.sonarsource.com/sonarqube/latest/try-out-sonarqube/)
