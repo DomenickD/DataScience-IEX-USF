@@ -20,7 +20,21 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: '3.10'  
-
+    - name: Install sonar-scanner
+      run: |
+        python -m pip install sonar-scanner
+  
+    - name: SonarCloud Scan
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      run: |
+        sonar-scanner \
+          -Dsonar.projectKey=DomenickD_DataScience-IEX-USF \
+          -Dsonar.organization=domenickd \
+          -Dsonar.host.url=https://sonarcloud.io \
+          -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
+          -Dsonar.cpp.file.suffixes=- \
+          -Dsonar.objc.file.suffixes=-
     # - name: Install dependencies
     #   run: |
     #   # pip install -r requirements.txt
@@ -30,11 +44,11 @@ jobs:
     #  run: |
     #    pytest --cov=. --cov-report xml:coverage.xml  # Run tests and generate coverage report
 
-    - name: SonarCloud Scan
-      uses: SonarSource/sonarcloud-github-action@4006f663ecaf1f8093e8e4abb9227f6041f52216
-      env:
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      with:
-         args:
-           -Dsonar.projectKey=DomenickD_DataScience-IEX-USF
-           -Dsonar.organization=domenickd
+    # - name: SonarCloud Scan
+    #   uses: SonarSource/sonarcloud-github-action@4006f663ecaf1f8093e8e4abb9227f6041f52216
+    #   env:
+    #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    #   with:
+    #      args:
+    #        -Dsonar.projectKey=DomenickD_DataScience-IEX-USF
+    #        -Dsonar.organization=domenickd
