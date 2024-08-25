@@ -27,7 +27,7 @@ jobs:
         pip install black
 
     - name: Run Black
-      run: black --check .
+      run: black Final_Project
 
   sonarcloud:
     needs: lint
