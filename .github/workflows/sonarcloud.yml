@@ -1,0 +1,36 @@
+name: SonarCloud
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  sonarcloud:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0  # SonarCloud needs the full history to assign issues properly
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.11'  
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+        pip install pytest-cov  # Install pytest-cov for coverage report
+
+    - name: Run tests with coverage
+      run: |
+        pytest --cov=. --cov-report xml:coverage.xml  # Run tests and generate coverage report
+
+    - name: SonarCloud Scan
+      uses: sonarsource/sonarcloud-github-action@master
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
