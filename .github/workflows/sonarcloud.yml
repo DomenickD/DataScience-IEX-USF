@@ -31,6 +31,10 @@ jobs:
     #    pytest --cov=. --cov-report xml:coverage.xml  # Run tests and generate coverage report
 
     - name: SonarCloud Scan
-      uses: sonarsource/sonarcloud-github-action@master
+      uses: SonarSource/sonarcloud-github-action@4006f663ecaf1f8093e8e4abb9227f6041f52216
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      with:
+         args:
+           -Dsonar.projectKey=DomenickD_DataScience-IEX-USF
+           -Dsonar.organization=domenickd
