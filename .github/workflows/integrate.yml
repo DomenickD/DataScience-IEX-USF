@@ -30,12 +30,17 @@ jobs:
         pip install black
         black --check . || true  # Continue even if Black encounters errors
 
+    - name: Install SonarQube Scanner
+      run: |
+        wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.8.0.2856-linux.zip
+        unzip sonar-scanner-cli-4.8.0.2856-linux.zip
+        export PATH=$PATH:$PWD/sonar-scanner-4.8.0.2856-linux/bin
+
     - name: Run SonarQube analysis
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}  # Store your SonarQube token as a secret
         SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}  # Store your SonarQube host URL as a secret
       run: |
-        pip install sonar-scanner-cli
         sonar-scanner \
           -Dsonar.projectKey=your_project_key \
           -Dsonar.organization=your_organization_key \
