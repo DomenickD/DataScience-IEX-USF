@@ -12,10 +12,10 @@ jobs:
     - name: Set up Python 3.12
       uses: actions/setup-python@v2
       with:
-        python-version: '3.12'
+        python-version: '3.12.2'
 
     - name: Install Black
       run: pip install black
 
     - name: Run Black Check
-      run: black --check .
+      run: black --check . --exclude '/(env|venv)/'
