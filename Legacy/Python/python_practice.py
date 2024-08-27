@@ -1,4 +1,4 @@
-#This will be the first python program for the IEX-USF Course
+# This will be the first python program for the IEX-USF Course
 print("Hello World")
 
 # #Now let's have some fun. numbers are great
@@ -14,5 +14,3 @@ print("Hello World")
 # #Here I used the .reverse() function to reverse the original list
 # numbered_list.reverse()
 # print(f"The variable reversed is: {numbered_list}")
-
-

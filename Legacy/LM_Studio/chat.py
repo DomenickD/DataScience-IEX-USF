@@ -80,7 +80,7 @@ if prompt := st.chat_input("What is up?"):
                 model="lmstudio-community/Meta-Llama-3-8B-Instruct-GGUF",
                 messages=[
                     {"role": "system", "content": "You are a code assistant."},
-                    {"role": "user", "content": prompt}
+                    {"role": "user", "content": prompt},
                 ],
                 temperature=0.7,
             )

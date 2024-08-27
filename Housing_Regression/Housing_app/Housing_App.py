@@ -6,58 +6,64 @@ from sklearn.preprocessing import MinMaxScaler
 
 from sklearn.feature_selection import SelectKBest, f_regression
 from sklearn.model_selection import train_test_split as tts
-import xgboost as xgb #pip install xgboost
+import xgboost as xgb  # pip install xgboost
 from sklearn import metrics
 from sklearn.pipeline import Pipeline
 from scipy.stats import randint, uniform
 from sklearn.model_selection import RandomizedSearchCV
 
 
+columns = [
+    "Gr Liv Area",
+    "Total Bsmt SF",
+    "Full Bath",
+    "TotRms AbvGrd",
+    "Fireplaces",
+    "Lot Area",
+    "Overall Qual",
+    "SalePrice",
+]
 
-columns = ['Gr Liv Area', 'Total Bsmt SF', 'Full Bath', 'TotRms AbvGrd', 'Fireplaces', 'Lot Area', 'Overall Qual', 'SalePrice']
-
-df = pd.read_csv('AmesHousing.txt',
-                 sep='\t',
-                 usecols=columns)
+df = pd.read_csv("AmesHousing.txt", sep="\t", usecols=columns)
 
 # df["Central_Air_Binary"] = df['Central Air'].map({'N': 0, 'Y': 1})
 # df = df.drop("Central Air", axis = 1)
 
 df = df.dropna()
 Y = df.SalePrice
-X = df.drop("SalePrice", axis = 1)
+X = df.drop("SalePrice", axis=1)
 
 
-pipeline = Pipeline([
-    ('scaler', MinMaxScaler()),
-    ('xgb', xgb.XGBRegressor())
-])
+pipeline = Pipeline([("scaler", MinMaxScaler()), ("xgb", xgb.XGBRegressor())])
 X_train, X_test, y_train, y_test = tts(X, Y, test_size=0.2, random_state=42)
 
 pipeline.fit(X_train, y_train)
-#for the plot on next page
+# for the plot on next page
 selector = SelectKBest(score_func=f_regression, k=6)
 X_train_new = selector.fit_transform(X_train, y_train)
-best_feature_indices = selector.get_support(indices=True) 
+best_feature_indices = selector.get_support(indices=True)
 original_column_names = X.columns.to_list()  # Store the names
 best_features = np.array(original_column_names)[best_feature_indices]
 
-#for corrlation matrix plot on next page
+# for corrlation matrix plot on next page
 df_corr = pd.concat([X, Y], axis=1, ignore_index=False)
 corr_matrix = df_corr.corr()
 
 st.header("House Prices Predictor")
-st.write("""
+st.write(
+    """
 **Data Source**:  [Github](https://github.com/rasbt/machine-learning-book/blob/main/ch09/AmesHousing.txt)       
 
 **Author**: Domenick Dobbs          
-""")
+"""
+)
 st.divider()
 st.image("Pictures/Ames_Downtown.png")
 st.caption("Downtown Ames, Iowa in the summer.")
 st.caption("Source: https://www.worldatlas.com/cities/ames-iowa.html")
 st.divider()
-st.write("""
+st.write(
+    """
 ## Data Background
 
 The Ames Housing Dataset was compiled by Dean De Cock (Iowa State University) in 2011 for use in research and education.
@@ -72,9 +78,11 @@ The primary goal of this project is to build a predictive model that can reliabl
          
 ---
 
-""")
+"""
+)
 
-st.write("""
+st.write(
+    """
 ## Columns Used in Analysis
 
 | Column Name | Data Type | Description |
@@ -89,7 +97,8 @@ st.write("""
 | SalePrice | Continuous | Sale price ($) |
 
 ***
-""")
+"""
+)
 
 y_pred = pipeline.predict(X_test)
 mse = metrics.mean_squared_error(y_test, y_pred)
@@ -98,12 +107,12 @@ r2 = metrics.r2_score(y_test, y_pred)
 
 
 param_dist = {
-    'xgb__n_estimators': randint(100, 400),
-    'xgb__max_depth': randint(2, 8),
-    'xgb__learning_rate': uniform(0.01, 0.2),
-    'xgb__subsample': uniform(0.6, 0.4),
-    'xgb__colsample_bytree': uniform(0.6, 0.4),
-    'xgb__reg_alpha': uniform(0, 1)
+    "xgb__n_estimators": randint(100, 400),
+    "xgb__max_depth": randint(2, 8),
+    "xgb__learning_rate": uniform(0.01, 0.2),
+    "xgb__subsample": uniform(0.6, 0.4),
+    "xgb__colsample_bytree": uniform(0.6, 0.4),
+    "xgb__reg_alpha": uniform(0, 1),
 }
 
 # @st.cache_resource
@@ -115,23 +124,45 @@ param_dist = {
 # Usage on Main Page
 # best_model = get_fitted_model(pipeline, X_train, y_train, param_dist)
 
-best_model = Pipeline(steps=[('scaler', MinMaxScaler()),
-                ('xgb',
-                 xgb.XGBRegressor(base_score=None, booster=None, callbacks=None,
-                              colsample_bylevel=None, colsample_bynode=None,
-                              colsample_bytree=0.8196235298606114, device=None,
-                              early_stopping_rounds=None,
-                              enable_categorical=False, eval_metric=None,
-                              feature_types=None, gamma=None, grow_policy=None,
-                              importance_type=None,
-                              interaction_constraints=None,
-                              learning_rate=0.03186751598813972, max_bin=None,
-                              max_cat_threshold=None, max_cat_to_onehot=None,
-                              max_delta_step=None, max_depth=4, max_leaves=None,
-                              min_child_weight=None,
-                              monotone_constraints=None, multi_strategy=None,
-                              n_estimators=268, n_jobs=None,
-                              num_parallel_tree=None, random_state=None))])
+best_model = Pipeline(
+    steps=[
+        ("scaler", MinMaxScaler()),
+        (
+            "xgb",
+            xgb.XGBRegressor(
+                base_score=None,
+                booster=None,
+                callbacks=None,
+                colsample_bylevel=None,
+                colsample_bynode=None,
+                colsample_bytree=0.8196235298606114,
+                device=None,
+                early_stopping_rounds=None,
+                enable_categorical=False,
+                eval_metric=None,
+                feature_types=None,
+                gamma=None,
+                grow_policy=None,
+                importance_type=None,
+                interaction_constraints=None,
+                learning_rate=0.03186751598813972,
+                max_bin=None,
+                max_cat_threshold=None,
+                max_cat_to_onehot=None,
+                max_delta_step=None,
+                max_depth=4,
+                max_leaves=None,
+                min_child_weight=None,
+                monotone_constraints=None,
+                multi_strategy=None,
+                n_estimators=268,
+                n_jobs=None,
+                num_parallel_tree=None,
+                random_state=None,
+            ),
+        ),
+    ]
+)
 
 best_model.fit(X_train, y_train)
 predictions = best_model.predict(X_test)
@@ -140,7 +171,8 @@ mae_post = metrics.mean_absolute_error(y_test, predictions)
 r2_post = metrics.r2_score(y_test, predictions)
 # print(f"Model: XGB Regression\nMSE: {mse_post:.2f}\nMAE: {mae_post:.2f}\nR-squared: {r2_post:.2f}\n-----------------")
 
-st.write(f"""
+st.write(
+    f"""
 ## Model Summary
 - **Model Type**: I'm using an XGBoost Regressor model. This is a powerful type of gradient boosting algorithm that builds decision trees in an ensemble to make predictions. It's known for its accuracy and ability to handle a wide variety of data types.
 
@@ -158,8 +190,9 @@ st.write(f"""
 - Mean Absolute Error : {mae_post:.2f}
 - R-Squared: {r2_post:.4f}
 
- """)
+ """
+)
 st.divider()
 
-filename = 'xgb_pipeline_minmaxscaler.pkl'
-pickle.dump(pipeline, open(filename, 'wb'))
+filename = "xgb_pipeline_minmaxscaler.pkl"
+pickle.dump(pipeline, open(filename, "wb"))

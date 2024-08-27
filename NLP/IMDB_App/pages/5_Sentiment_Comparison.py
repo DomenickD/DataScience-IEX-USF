@@ -7,24 +7,24 @@ from nltk.stem import WordNetLemmatizer, PorterStemmer
 import re
 
 st.header("NLTK (Manual) vs. LLM (LLama) Performance")
-nltk.download('punkt')
-nltk.download('stopwords')
+nltk.download("punkt")
+nltk.download("stopwords")
 st.divider()
 st.subheader("Preprocessing")
-#The sentence for processing. If we change this, we need to ask the LLM so preprocess that one too
+# The sentence for processing. If we change this, we need to ask the LLM so preprocess that one too
 sentence = "This is an example of how NLP works~! Can it clean numbers? 1 2 3 %^&* :)"
-#remove re
-cleaned_text = re.sub(r'[^a-zA-Z\s]+', '', sentence) 
-#lower
+# remove re
+cleaned_text = re.sub(r"[^a-zA-Z\s]+", "", sentence)
+# lower
 lower_sentence = cleaned_text.lower()
-#tokens
+# tokens
 tokens = word_tokenize(lower_sentence)
-#stopword remove
-stop_words = set(stopwords.words('english'))
+# stopword remove
+stop_words = set(stopwords.words("english"))
 filtered_tokens = [word for word in tokens if not word in stop_words]
 # pos tagging
 pos_word = nltk.pos_tag(filtered_tokens)
-#stemming
+# stemming
 stemmer = PorterStemmer()
 stemmed_words = [stemmer.stem(word) for word in filtered_tokens]
 # lemm
@@ -32,7 +32,8 @@ lemmatizer = WordNetLemmatizer()
 lemmatized_words = [lemmatizer.lemmatize(word) for word in filtered_tokens]
 
 
-st.write(f"""
+st.write(
+    f"""
 The text for processing: {sentence}
 
 | NLP Step | NLTK | LLama (LLM) |
@@ -43,7 +44,8 @@ The text for processing: {sentence}
 | POS Tagging | {pos_word} | [this (DT), is (VBZ), an (DT), example (NN), of (IN), how (WRB), nlp (NNP), works~! (.!), can (MD), it (PRP), clean (VB), numbers? (?) 1 (CD) 2 (CD) 3 (CD) % (%), ^ (X), & (&), * (*), :) (:)] |
 | Stemming | {stemmed_words} | [this, is, an, exampl, how, nlp, work, can, it, clea, numb] (removed: example, of, nlp, works~!, clean, numbers?) |
 | Lemmatization | {lemmatized_words} | [this, be, a, way, nlp, do, something, can, you, make, clean, number] (removed: is, an, exampl, how, work, it, clea, numb) |
-""")
+"""
+)
 st.divider()
 st.subheader("Sentiment Prediction")
 
@@ -53,7 +55,8 @@ review_two = "When this cartoon first aired I was under the impression that it w
 
 review_three = 'Good, funny, straightforward story, excellent Nicole Kidman (I almost always like the movies she\'s in). This was a good "vehicle" for someone adept at comedy and drama since there are elements of both. A romantic comedy wrapped around two crime stories, great closing lines. Chaplin, very good here, was also good in another good, but unpopular romantic comedy ("Truth about Cats & Dogs"). Maybe they\'re too implausible. Ebert didn\'t even post a review for this. The great "screwball" comedies obviously were totally implausible ("Bringing up Baby", etc.). If you\'ve seen one implausible comedy, you\'ve seen them all? Or maybe people are ready to move on from the 1930s. Weird. Birthday Girl is a movie I\'ve enjoyed several times. Nicole Kidman may be the "killer app" for home video.'
 
-st.write(f"""
+st.write(
+    f"""
          
 | Review Original | Model Prediction | LLama (LLM) Prediction | Actual Value |
 |---|---|---|---|
@@ -62,14 +65,18 @@ st.write(f"""
 | {review_three} | Positive | "POSITIVE" | 1 (positive) |
 
          
-""")
-st.caption("Negative or 0 indicates a bad review sentiment. Positive or 1 indicates a good review sentiment.")
+"""
+)
+st.caption(
+    "Negative or 0 indicates a bad review sentiment. Positive or 1 indicates a good review sentiment."
+)
 
 st.divider()
 
 st.subheader("Summary Statistics")
 
-st.write("""The sentiment analysis is a simple use case for NLP so we see that the LLama LLM performed the same as our trained model when it came down to a binary classifcation (prediction).
+st.write(
+    """The sentiment analysis is a simple use case for NLP so we see that the LLama LLM performed the same as our trained model when it came down to a binary classifcation (prediction).
 
 On 500 Samples from the 50,000 dataset.
          
@@ -84,4 +91,5 @@ On 2,000 Samples from the 50,000 dataset.
 Logistic Regression Accuracy: 0.8225
          
 LLM Accuracy: 0.959785522788203
-""")
+"""
+)
