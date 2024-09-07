@@ -21,3 +21,4 @@ Flask
 Flask-Cors
 plotly
 torchaudio
+scikit-optimize

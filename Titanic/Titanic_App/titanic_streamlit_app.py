@@ -112,12 +112,16 @@ test["Sex_binary"] = test.Sex.map({"male": 0, "female": 1})
 
 
 class RoundingTransformer(BaseEstimator, TransformerMixin):
+    """copy and paste"""
+
     def fit(self):
+        """Can delete this"""
         return self
 
-    def transform(self, X):
-        X = X.round()
-        return X
+    def transform(self, x_value):
+        """transform method"""
+        x_value = x_value.round()
+        return x_value
 
 
 imputer = SimpleImputer(strategy="mean")

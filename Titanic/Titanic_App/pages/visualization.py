@@ -7,9 +7,9 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
 import numpy as np
-
-import ..titanic_app as titanic
 from sklearn.model_selection import cross_val_score, learning_curve, validation_curve
+
+import Titanic.Titanic_App.titanic_streamlit_app as titanic
 
 
 titanic_data = pd.read_csv("titanic_data.csv")
