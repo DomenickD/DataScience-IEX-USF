@@ -20,4 +20,3 @@ joblib
 Flask
 Flask-Cors
 plotly
-skopt
