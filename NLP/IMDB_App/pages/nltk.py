@@ -1,3 +1,6 @@
+"""the NLTK module explaination for NLP
+for the streamlit app"""
+
 import streamlit as st
 import nltk
 from nltk.corpus import stopwords
@@ -104,7 +107,8 @@ if input_text_nltk:
         word for word in words if word.lower() not in stop_words and word.isalnum()
     ]  # Also remove non-alphanumeric characters
     st.code(
-        f"filtered_words = [word for word in words if word.lower() not in stopwords.words('english')]",
+        "filtered_words = [word for word in words \
+            if word.lower() not in stopwords.words('english')]",
         language="python",
     )
     st.write(filtered_words)
@@ -116,7 +120,8 @@ if input_text_nltk:
     lemmatizer = WordNetLemmatizer()
     lemmatized_words = [lemmatizer.lemmatize(word) for word in filtered_words]
     st.code(
-        f"""lemmatizer = WordNetLemmatizer()\nlemmatized_words = [lemmatizer.lemmatize(word) for word in filtered_words]""",
+        """lemmatizer = WordNetLemmatizer()\nlemmatized_words = \
+            [lemmatizer.lemmatize(word) for word in filtered_words]""",
         language="python",
     )
     st.write(lemmatized_words)
@@ -128,21 +133,8 @@ if input_text_nltk:
     stemmer = PorterStemmer()
     stemmed_words = [stemmer.stem(word) for word in filtered_words]
     st.code(
-        f"""stemmer = PorterStemmer()\nstemmed_words = [stemmer.stem(word) for word in filtered_words]""",
+        """stemmer = PorterStemmer()\nstemmed_words = \
+            [stemmer.stem(word) for word in filtered_words]""",
         language="python",
     )
     st.write(stemmed_words)
-
-
-# st.header("NLTK in Action: Easy vs. Manual")
-# st.subheader("Tokenization:")
-# st.code("words = nltk.word_tokenize('This is a sample sentence.')")
-# st.write("Vs. writing complex code to split by spaces and punctuation.")
-
-# st.subheader("Stopword Removal:")
-# st.code("words = [w for w in words if not w in stopwords.words('english')]")
-# st.write("Vs. manually creating and maintaining a list of stopwords.")
-
-# st.subheader("Lemmatization:")
-# st.code("lemmatizer = WordNetLemmatizer()\nwords = [lemmatizer.lemmatize(w) for w in words]")
-# st.write("Vs. complex algorithms to determine word roots.")

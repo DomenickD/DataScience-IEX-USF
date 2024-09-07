@@ -1,9 +1,16 @@
+"""Intor to LDA for streamlit app NLP"""
+
 import streamlit as st
 
 st.header("What is LDA?")
 st.write(
     """
-Latent Dirichlet Allocation (pronounced *lay-tent deer-ish-lay al-oh-kay-shun*) is a method to uncover hidden themes or topics in a collection of documents. Think of it as a way to automatically group movie reviews based on similar subjects.
+Latent Dirichlet Allocation \
+    (pronounced *lay-tent deer-ish-lay al-oh-kay-shun*) \
+        is a method to uncover hidden themes or topics \
+            in a collection of documents. \
+                Think of it as a way to automatically \
+                    group movie reviews based on similar subjects.
 """
 )
 
@@ -98,7 +105,8 @@ action fight guy guys cool
 )
 
 st.write(
-    "This code snippet demonstrates the basic steps involved in training an LDA model and extracting topics."
+    "This code snippet demonstrates the basic steps \
+        involved in training an LDA model and extracting topics."
 )
 
 st.divider()
@@ -107,10 +115,14 @@ st.divider()
 st.header("Interpreting LDA Results")
 st.write(
     """
-LDA produces topics as lists of words.  You'd then interpret these word lists to understand what each topic represents.  For example, a topic might look like this:
+LDA produces topics as lists of words.  \
+    You'd then interpret these word lists to \
+        understand what each topic represents.  \
+            For example, a topic might look like this:
 """
 )
 st.code(
-    """(0, '0.020*"acting" + 0.015*"performance" + 0.012*"role" + 0.010*"oscar" + ...')"""
+    """(0, '0.020*"acting" + 0.015*"performance" + 0.012*"role"\
+          + 0.010*"oscar" + ...')"""
 )
 st.write("This could represent a topic about acting and awards.")

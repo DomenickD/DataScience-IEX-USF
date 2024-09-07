@@ -1,5 +1,7 @@
-import streamlit as st
+"""The streamlit page for teh process on NLP"""
+
 import re
+import streamlit as st
 import spacy
 
 st.header("The Natural Language Process")
@@ -9,17 +11,25 @@ st.subheader("Text Cleaning")
 
 st.write(
     """
-- Lowercasing: Convert all text to lowercase to ensure consistency and avoid treating words like "Hello" and "hello" as different.
+- Lowercasing: Convert all text to lowercase to ensure consistency and \
+    avoid treating words like "Hello" and "hello" as different.
 
-- Punctuation Removal: Remove punctuation marks (periods, commas, exclamation points, etc.) as they often don't contribute much to the meaning of the text in many NLP tasks.
+- Punctuation Removal: Remove punctuation marks (periods, commas, \
+    exclamation points, etc.) as they often don't contribute much to the \
+        meaning of the text in many NLP tasks.
 
-- Number Removal: Decide whether numbers are relevant to your task. If not, remove them.
+- Number Removal: Decide whether numbers are relevant to your task. \
+    If not, remove them.
 
-- Special Character Removal: Get rid of any remaining special characters (e.g., *, &, #) that don't add value.
+- Special Character Removal: Get rid of any remaining special characters \
+    (e.g., *, &, #) that don't add value.
 
-- Whitespace Handling: Standardize whitespace by converting multiple spaces into single spaces and removing leading or trailing spaces.
+- Whitespace Handling: Standardize whitespace by converting multiple spaces \
+    into single spaces and removing leading or trailing spaces.
 
-- Stopword Removal: Consider removing common words like "the," "a," "an," etc. These words appear frequently but might not be significant for tasks like text classification or topic modeling.
+- Stopword Removal: Consider removing common words like "the," "a," "an," \
+    etc. These words appear frequently but might not be significant for \
+        tasks like text classification or topic modeling.
 """
 )
 
@@ -32,29 +42,30 @@ st.divider()
 
 if input_text:
     # Lowercasing
-    cleaned_text = input_text.lower()
+    CLEANED_TEXT = input_text.lower()
     st.subheader("Lowercased Text:")
-    st.code(cleaned_text, language="text")
+    st.code(CLEANED_TEXT, language="text")
 
     st.divider()
 
     # Punctuation Removal
-    cleaned_text = "".join(c for c in cleaned_text if c.isalnum() or c.isspace())
+    CLEANED_TEXT = "".join(c for c in CLEANED_TEXT if c.isalnum() or c.isspace())
     st.subheader("Punctuation Removed:")
-    st.code(cleaned_text, language="text")
+    st.code(CLEANED_TEXT, language="text")
 
     st.divider()
 
     # Number and Special Character Removal (Combined)
-    cleaned_text = "".join(c for c in cleaned_text if c.isalpha() or c.isspace())
+    CLEANED_TEXT = "".join(c for c in CLEANED_TEXT if c.isalpha() or c.isspace())
     st.subheader("Numbers & Special Characters Removed:")
-    st.code(cleaned_text, language="text")
+    st.code(CLEANED_TEXT, language="text")
 
     st.divider()
 
     st.subheader("Manual Part of Speech Tagging")
 
     def simple_tagger(text):
+        """function to tag text manually"""
         tagged = []
         for word in text.split():
             if word in ["the", "a", "an"]:
@@ -80,7 +91,7 @@ if input_text:
     """
     )
 
-    tagged_tokens_manual = simple_tagger(cleaned_text)
+    tagged_tokens_manual = simple_tagger(CLEANED_TEXT)
     st.write(tagged_tokens_manual)
 
     stopwords = set(
@@ -148,14 +159,14 @@ if input_text:
     )
 
     # Stopword Removal (manual)
-    words = cleaned_text.split()
+    words = CLEANED_TEXT.split()
     filtered_words = [word for word in words if word.lower() not in stopwords]
     st.subheader("Stopword Removal (Manual):")
     st.write(
         f"We have to define a list of stopwords before filtering through them:\n\n {stopwords}"
     )
     st.code(
-        f"""filtered_words = [word for word in words if word.lower() not in stopwords]""",
+        """filtered_words = [word for word in words if word.lower() not in stopwords]""",
         language="python",
     )
     st.write(filtered_words)
@@ -166,9 +177,13 @@ st.write(
     """
 **A "Token" is broadly defined as 3-4 characters.**         
 
-- Word Tokenization: Break the text into individual words. You can do this manually by splitting the text at whitespace boundaries or using custom logic for handling punctuation.
+- Word Tokenization: Break the text into individual words. \
+    You can do this manually by splitting the text at whitespace \
+        boundaries or using custom logic for handling punctuation.
 
-- Sentence Tokenization: If needed, divide the text into separate sentences. Look for punctuation marks like periods, question marks, and exclamation points as potential sentence boundaries.
+- Sentence Tokenization: If needed, divide the text into separate \
+    sentences. Look for punctuation marks like periods, question marks, \
+        and exclamation points as potential sentence boundaries.
 """
 )
 
@@ -195,9 +210,14 @@ st.header("Normalization")
 st.write(
     """
 
-- Stemming: Reduce words to their root form (e.g., "running," "runs," "ran" become "run"). This can help group similar words together.
+- Stemming: Reduce words to their root form (e.g., "running," \
+    "runs," "ran" become "run"). This can help group similar \
+        words together.
 
-- Lemmatization: A more sophisticated approach than stemming, lemmatization reduces words to their base or dictionary form (lemma) considering the part of speech. For example, "better" becomes "good."
+- Lemmatization: A more sophisticated approach than stemming, \
+    lemmatization reduces words to their base or dictionary form \
+        (lemma) considering the part of speech. For example, \
+            "better" becomes "good."
 """
 )
 
@@ -214,7 +234,8 @@ def stem_word(word):
         return word[:-1]
     return word
 
-# Function for lemmatization (manual lemmatization is complex so we had to use Spacy)
+# Function for lemmatization (manual lemmatization is complex so \
+# we had to use Spacy)
 def lemmatize_word(word):
   #Lemmatizes a word using spaCy.
   doc = nlp(word)
@@ -226,18 +247,20 @@ def lemmatize_word(word):
 
 # Simple stemming function (not as sophisticated as NLTK's)
 def stem_word(word):
+    """function for word stemming"""
     # Basic rules for removing suffixes (you can add more)
     if word.endswith("ing"):
         return word[:-3]
-    elif word.endswith("ed"):
+    if word.endswith("ed"):
         return word[:-2]
-    elif word.endswith("s"):
+    if word.endswith("s"):
         return word[:-1]
     return word
 
 
 # function for lemma
 def lemmatize_word(word):
+    """lem the word"""
     nlp = spacy.load("en_core_web_sm")
     # Lemmatizes a word using spaCy.
     doc = nlp(word)
@@ -249,7 +272,7 @@ if input_text:
     stemmed_words = [stem_word(word) for word in filtered_words]
     st.subheader("Stemming (Manual):")
     st.code(
-        f"""stemmed_words = [stem_word(word) for word in filtered_words]""",
+        """stemmed_words = [stem_word(word) for word in filtered_words]""",
         language="python",
     )
     st.write(stemmed_words)
@@ -258,7 +281,7 @@ if input_text:
     lemmatized_words = [lemmatize_word(word) for word in filtered_words]
     st.subheader("Lemmatization (Manual - With Spacy):")
     st.code(
-        f"""lemmatized_words = [lemmatize_word(word) for word in filtered_words]""",
+        """lemmatized_words = [lemmatize_word(word) for word in filtered_words]""",
         language="python",
     )
     st.write(lemmatized_words)

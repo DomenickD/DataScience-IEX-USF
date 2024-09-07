@@ -1,9 +1,11 @@
+"""using the LLM with LMstudio"""
+
+import requests
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
-import requests
 
 # Load the dataset
 df = pd.read_csv("NLP/movie_data.csv")
@@ -33,9 +35,10 @@ print(f"Logistic Regression Accuracy: {accuracy_logreg}")
 
 # Function to get predictions from the LLM
 def get_llm_predictions(reviews):
+    """function to predict with llm"""
     predictions = []
-    headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
-    url = f"{base_url}/completions"
+    headers = {"Authorization": f"Bearer {API_KEY}", "Content-Type": "application/json"}
+    url = f"{BASE_URL}/completions"
     for review in reviews:
         payload = {
             "model": "model-identifier",
@@ -43,7 +46,7 @@ def get_llm_predictions(reviews):
             "max_tokens": 10,
             "temperature": 0.0,
         }
-        response = requests.post(url, json=payload, headers=headers)
+        response = requests.post(url, json=payload, headers=headers, timeout=15)
         if response.status_code != 200:
             print(f"Error: {response.status_code} - {response.text}")
             predictions.append(-1)
@@ -64,8 +67,8 @@ def get_llm_predictions(reviews):
 
 
 # Get predictions from the LLM for the test set
-api_key = "lm-studio"
-base_url = "http://localhost:1234/v1"
+API_KEY = "lm-studio"
+BASE_URL = "http://localhost:1234/v1"
 X_test_list = X_test.tolist()
 y_pred_llm = get_llm_predictions(X_test_list)
 
