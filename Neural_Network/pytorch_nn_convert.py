@@ -1,13 +1,16 @@
+"""The formerly ipynb converted to py for linting"""
 
 import torch
-import torch.nn as nn
-import torch.optim as optim
-from torchvision import datasets, transforms
-import numpy as np
-from matplotlib import pyplot as plt
+from torch import nn
+from torch import optim
 import torch.nn.functional as F
 from torch.utils.tensorboard import SummaryWriter
+
 import torchvision
+from torchvision import datasets, transforms
+
+from matplotlib import pyplot as plt
+import numpy as np
 
 
 # Writer will output to ./runs/ directory by default
@@ -48,21 +51,27 @@ test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=64, shuffle=F
 
 # init the nn class with an init function and a forward pass
 class Net(nn.Module):
+    """init the nn class with an init function and a forward pass"""
+
     def __init__(self):
-        super(Net, self).__init__()
+        """Init"""
+        super().__init__()  # Updated super() call
         self.fc1 = nn.Linear(
             28 * 28, 512
         )  # Input: 28x28 image, Hidden layer: 512 neurons
         self.fc2 = nn.Linear(512, 10)  # Output: 10 classes (digits 0-9)
 
-    def forward(self, x):
-        x = x.view(-1, 28 * 28)  # Flatten the image
-        x = F.relu(self.fc1(x))  # what should this be if F is wrong?
-        x = self.fc2(x)
-        return x
+    def forward(self, input_data):
+        """
+        Forward pass
+        """
+        flattened_image = input_data.view(-1, 28 * 28)  # Flatten the image
+        activated_output = F.relu(self.fc1(flattened_image))
+        output_nn = self.fc2(activated_output)
+        return output_nn
 
 
-model = torchvision.models.resnet50(False)
+model = torchvision.models.resnet50(pretrained=False)
 # Have ResNet model take in grayscale rather than RGB
 model.conv1 = torch.nn.Conv2d(1, 64, kernel_size=7, stride=2, padding=3, bias=False)
 images, labels = next(iter(train_loader))
@@ -72,16 +81,18 @@ writer.add_graph(model, images)
 writer.close()
 
 
-# establish the model, loss function and the optim (brett used Adam so lets go with that one. the list is insanely long to choose from)
+# establish the model, loss function and the optim (brett used Adam so
+# lets go with that one. the list is insanely long to choose from)
 model = Net()
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 
 
-# Initialize lists to store metrics - gonna use this for graphing my learning
+# Initialize lists to store metrics -
+# gonna use this for graphing my learning
 train_losses = []
 train_accuracies = []
-test_losses = []
+TEST_LOSSes = []
 test_accuracies = []
 
 
@@ -99,7 +110,8 @@ for epoch in range(10):
 
         _, predicted = torch.max(
             output.data, 1
-        )  # the underscore is our throwaway variable which is apprently a common naming convention -COOL!
+        )  # the underscore is our throwaway variable
+        # which is apprently a common naming convention -COOL!
         train_accuracy = (predicted == target).sum().item() / len(train_dataset) * 100
         train_accuracies.append(train_accuracy)
 
@@ -108,31 +120,31 @@ for epoch in range(10):
 
 
 model.eval()  # Set the model to evaluation mode
-test_loss = 0
-correct = 0
+TEST_LOSS = 0
+CORRECT = 0
 with torch.no_grad():  # No gradients needed during evaluation
     for data, target in test_loader:
         output = model(data)
-        test_loss += criterion(output, target).item()
+        TEST_LOSS += criterion(output, target).item()
         pred = output.argmax(dim=1, keepdim=True)
-        correct += pred.eq(target.view_as(pred)).sum().item()
+        CORRECT += pred.eq(target.view_as(pred)).sum().item()
 
-        test_loss /= len(test_loader.dataset)
-        test_losses.append(test_loss)  # for display
-        accuracy = 100.0 * correct / len(test_loader.dataset)
+        TEST_LOSS /= len(test_loader.dataset)
+        TEST_LOSSes.append(TEST_LOSS)  # for display
+        accuracy = 100.0 * CORRECT / len(test_loader.dataset)
         test_accuracies.append(accuracy)  # for display
 
 
-print(f"Test Loss: {test_loss:.4f}, Accuracy: {accuracy:.2f}%")
+print(f"Test Loss: {TEST_LOSS:.4f}, Accuracy: {accuracy:.2f}%")
 
 
 train_losses = train_losses[:10]
 train_accuracies = train_accuracies[:10]
-test_losses = test_losses[:10]
+TEST_LOSSes = TEST_LOSSes[:10]
 test_accuracies = test_accuracies[:10]
 print(train_losses)
 print(train_accuracies)
-print(test_losses)
+print(TEST_LOSSes)
 print(test_accuracies)
 
 
@@ -143,7 +155,7 @@ plt.figure(figsize=(12, 6))
 # Loss Chart
 plt.subplot(1, 2, 1)
 plt.plot(epochs, train_losses, label="Training Loss", marker="o")
-# plt.plot(epochs, test_losses, label='Epoch', marker='x')
+# plt.plot(epochs, TEST_LOSSes, label='Epoch', marker='x')
 plt.title("Learning Curve - Loss")
 plt.xlabel("Epoch")
 plt.ylabel("Loss")
@@ -182,16 +194,6 @@ plt.grid(alpha=0.4)  # Add a light grid
 plt.show()
 
 
-%tensorboard --logdir logs/fit
-
-
+# %tensorboard --logdir logs/fit
 # Run tensorboard with
 # tensorboard --logdir=runs
-
-
-
-
-
-
-
-
