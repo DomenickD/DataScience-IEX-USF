@@ -1,10 +1,12 @@
+"""Viz page for streamlit app for housing"""
+
 import streamlit as st
 import matplotlib.pyplot as plt
 import seaborn as sns
-import plotly.graph_objects as go
 import plotly.express as px
 import numpy as np
-from Housing_App import (
+from sklearn.model_selection import learning_curve, validation_curve, cross_val_score
+from ..housing_app import (
     pipeline,
     X_train,
     y_train,
@@ -15,7 +17,6 @@ from Housing_App import (
     selector,
     r2,
 )
-from sklearn.model_selection import learning_curve, validation_curve, cross_val_score
 
 st.header("Visualizations")
 
@@ -95,7 +96,9 @@ fig = px.box(
 fig.update_layout(xaxis_title="Overall Quality", yaxis_title="Sale Price ($)")
 st.plotly_chart(fig)
 st.caption(
-    "See how the distribution and median sale prices differ across quality ratings. This shows that some the highest quality homes can be less than $200k."
+    "See how the distribution and median sale prices differ across \
+        quality ratings. This shows that some the highest quality \
+            homes can be less than $200k."
 )
 st.divider()
 ###
@@ -110,7 +113,8 @@ plt.xticks(rotation=45)
 plt.yticks(rotation=45)
 st.pyplot(fig)
 st.caption(
-    """This Heatmap will display correlations between features. We are only concerned with what correlates with the SalesPrice feature."""
+    """This Heatmap will display correlations between features. \
+        We are only concerned with what correlates with the SalesPrice feature."""
 )
 
 st.divider()
@@ -147,11 +151,11 @@ st.caption("High Variance.")
 st.divider()
 st.subheader("Validation Curve: Varying C")
 
-param_name = "xgb__learning_rate"  # Choose a hyperparameter to vary
+PARAM_NAME = "xgb__learning_rate"  # Choose a hyperparameter to vary
 param_range = np.logspace(-3, 2, num=5)
 
 train_scores, test_scores = validation_curve(
-    pipeline, X_train, y_train, param_name=param_name, param_range=param_range, cv=10
+    pipeline, X_train, y_train, param_name=PARAM_NAME, param_range=param_range, cv=10
 )
 
 # Calculate means and standard deviations
@@ -181,10 +185,10 @@ st.caption(f"R2 Score: {r2:.4f} ± {cv_std:.4f}")
 
 st.divider()
 st.subheader("Unsupervised Learning - K-Means++")
-st.image("Pictures\K-Means++_Elbow_Plot.png")
+st.image(r"Pictures\K-Means++_Elbow_Plot.png")
 st.caption("Here is the attempt at applying Kmeans++ to the Ames Housing Dataset.")
 
 st.divider()
 st.subheader("Unsupervised Learning - DBSCAN")
-st.image("Pictures\DBSCAN_Default_Params.png")
+st.image(r"Pictures\DBSCAN_Default_Params.png")
 st.caption("Here is the attempt at applying DBSCAN to the Ames Housing Dataset.")

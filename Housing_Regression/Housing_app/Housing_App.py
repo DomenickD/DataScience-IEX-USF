@@ -1,16 +1,16 @@
+"""Entry point for streamlit splash page"""
+
+import pickle
 import streamlit as st
 import pandas as pd
 import numpy as np
-import pickle
 from sklearn.preprocessing import MinMaxScaler
-
 from sklearn.feature_selection import SelectKBest, f_regression
 from sklearn.model_selection import train_test_split as tts
-import xgboost as xgb  # pip install xgboost
 from sklearn import metrics
 from sklearn.pipeline import Pipeline
 from scipy.stats import randint, uniform
-from sklearn.model_selection import RandomizedSearchCV
+import xgboost as xgb
 
 
 columns = [
@@ -52,7 +52,8 @@ corr_matrix = df_corr.corr()
 st.header("House Prices Predictor")
 st.write(
     """
-**Data Source**:  [Github](https://github.com/rasbt/machine-learning-book/blob/main/ch09/AmesHousing.txt)       
+**Data Source**:  \
+    [Github](https://github.com/rasbt/machine-learning-book/blob/main/ch09/AmesHousing.txt)       
 
 **Author**: Domenick Dobbs          
 """
@@ -66,15 +67,23 @@ st.write(
     """
 ## Data Background
 
-The Ames Housing Dataset was compiled by Dean De Cock (Iowa State University) in 2011 for use in research and education.
-The data captures information on residential home sales in Ames, Iowa between 2006 and 2010.
-The Full dataset contains 2930 records and it is a commonly used dataset for Exploratory Data Analysis for Machine Learning Regression.     
+The Ames Housing Dataset was compiled by Dean De Cock \
+    (Iowa State University) in 2011 for use in research and education.
+The data captures information on residential home sales \
+    in Ames, Iowa between 2006 and 2010.
+The Full dataset contains 2930 records and it is a commonly \
+    used dataset for Exploratory Data Analysis for Machine Learning Regression.     
     
 ---
          
 ## Goal 
          
-The primary goal of this project is to build a predictive model that can reliably estimate the sale price of a house in Ames, Iowa. This model will leverage various housing attributes, like living area, number of bedrooms, and overall quality, to uncover patterns and make informed predictions.
+The primary goal of this project is to build a predictive model that \
+    can reliably estimate the sale price of a house in Ames, Iowa. \
+        This model will leverage various housing attributes, \
+            like living area, number of bedrooms, and overall \
+                quality, to uncover patterns and make informed \
+                    predictions.
          
 ---
 
@@ -117,7 +126,8 @@ param_dist = {
 
 # @st.cache_resource
 # def get_fitted_model(_pipeline, X_train, y_train, _param_dist):
-#     random_search = RandomizedSearchCV(_pipeline, _param_dist, n_iter=100, cv=5, scoring='neg_mean_squared_error', verbose=1)
+#     random_search = RandomizedSearchCV(_pipeline, _param_dist,
+# n_iter=100, cv=5, scoring='neg_mean_squared_error', verbose=1)
 #     random_search.fit(X_train, y_train)  # Fit the model once
 #     return random_search.best_estimator_
 
@@ -169,14 +179,21 @@ predictions = best_model.predict(X_test)
 mse_post = metrics.mean_squared_error(y_test, predictions)
 mae_post = metrics.mean_absolute_error(y_test, predictions)
 r2_post = metrics.r2_score(y_test, predictions)
-# print(f"Model: XGB Regression\nMSE: {mse_post:.2f}\nMAE: {mae_post:.2f}\nR-squared: {r2_post:.2f}\n-----------------")
+# print(f"Model: XGB Regression\nMSE: {mse_post:.2f}\nMAE:
+# {mae_post:.2f}\nR-squared: {r2_post:.2f}\n-----------------")
 
 st.write(
     f"""
 ## Model Summary
-- **Model Type**: I'm using an XGBoost Regressor model. This is a powerful type of gradient boosting algorithm that builds decision trees in an ensemble to make predictions. It's known for its accuracy and ability to handle a wide variety of data types.
+- **Model Type**: I'm using an XGBoost Regressor model. This is a powerful \
+    type of gradient boosting algorithm that builds decision trees in an \
+        ensemble to make predictions. It's known for its accuracy and \
+            ability to handle a wide variety of data types.
 
-- **Feature Scaling**: I've applied a MinMaxScaler to the data. This scaling technique helps ensure that all features in the dataset have a similar range (typically between 0 and 1), which can improve the performance of the model.
+- **Feature Scaling**: I've applied a MinMaxScaler to the data. This \
+    scaling technique helps ensure that all features in the dataset \
+        have a similar range (typically between 0 and 1), which can \
+            improve the performance of the model.
  
 ---
          
@@ -194,5 +211,6 @@ st.write(
 )
 st.divider()
 
-filename = "xgb_pipeline_minmaxscaler.pkl"
-pickle.dump(pipeline, open(filename, "wb"))
+FILENAME = "xgb_pipeline_minmaxscaler.pkl"
+with open(FILENAME, "wb") as f:
+    pickle.dump(pipeline, f)

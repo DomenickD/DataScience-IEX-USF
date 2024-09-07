@@ -1,15 +1,11 @@
-import streamlit as st
+"""The prediction tool v1 for housing"""
+
 import pickle
+import streamlit as st
 import pandas as pd
-from sklearn.preprocessing import MinMaxScaler
 
-# with open('my_model.pkl', 'rb') as f:
-#     model = pickle.load(f)
-
-# # Scalerminmax = MinMaxScaler()
-# with open('scaler.pkl', 'rb') as f:
-#     Scalerminmax = pickle.load(f)
-loaded_pipeline = pickle.load(open("xgb_pipeline_minmaxscaler.pkl", "rb"))
+with open("xgb_pipeline_minmaxscaler.pkl", "rb") as f:
+    loaded_pipeline = pickle.load(f)
 st.write(
     """
 ## Housing Price Exploration Tool
@@ -32,7 +28,8 @@ TotRms_AbvGrd = st.number_input(
 )
 Fireplaces = st.number_input("Number of fireplaces:", min_value=0, max_value=5, value=2)
 
-# columns = ['Gr Liv Area', 'Total Bsmt SF', 'Full Bath', 'TotRms AbvGrd', 'Fireplaces', 'Lot Area', 'Overall Qual', 'SalePrice']
+# columns = ['Gr Liv Area', 'Total Bsmt SF', 'Full Bath',
+# 'TotRms AbvGrd', 'Fireplaces', 'Lot Area', 'Overall Qual', 'SalePrice']
 
 user_input = pd.DataFrame(
     {
