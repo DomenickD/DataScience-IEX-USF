@@ -19,3 +19,5 @@ keras
 joblib 
 Flask
 Flask-Cors
+plotly
+skopt

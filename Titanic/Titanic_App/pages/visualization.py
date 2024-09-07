@@ -8,7 +8,7 @@ import seaborn as sns
 import pandas as pd
 import numpy as np
 
-import titanic_app as titanic
+import ..titanic_app as titanic
 from sklearn.model_selection import cross_val_score, learning_curve, validation_curve
 
 
@@ -210,14 +210,14 @@ st.divider()
 
 st.subheader("Validation Curve: Varying C")
 
-param_name = "lr__C"  # Choose a hyperparameter to vary
+PARAM_NAME = "lr__C"  # Choose a hyperparameter to vary
 param_range = np.logspace(-3, 2, num=5)
 
 train_scores, test_scores = validation_curve(
     titanic.pipeline,
     titanic.X_train,
     titanic.y_train,
-    param_name=param_name,
+    param_name=PARAM_NAME,
     param_range=param_range,
     cv=10,
 )
@@ -248,12 +248,12 @@ st.caption(f"Accuracy Score: {titanic.accuracy:.4f} ± {cv_std:.4f}")
 
 st.divider()
 st.subheader("Unsupervised Learning - K-Means++")
-st.image("Pictures\KMEANS++_Elbow.png")
+st.image(r"Pictures\KMEANS++_Elbow.png")
 st.caption("Here is the attempt at applying Kmeans++ to the Titanic Dataset.")
 
 st.divider()
 st.subheader("Unsupervised Learning - DBSCAN")
-st.image("Pictures\DBSCAN_DEFAULT.png")
+st.image(r"Pictures\DBSCAN_DEFAULT.png")
 st.caption(
     "Here is the attempt at applying DBSCAN to the Titanic Dataset. No noticable trends."
 )

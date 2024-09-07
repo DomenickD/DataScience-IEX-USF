@@ -112,7 +112,7 @@ print(f"lr accuracy ON TRAINING DATA= {pipeline_lr_acc}")
 # Define parameter grids for each model
 param_grid_lr = {
     "lr__penalty": ["l1", "l2"],
-    "lr__C": [0.001, 0.01, 0.1, 1, 10, 100, 110, 125, 150, 200],
+    # "lr__C": [0.001, 0.01, 0.1, 1, 10, 100, 110, 125, 150, 200],
     "lr__C": np.logspace(-3, 2, num=10),
     "lr__solver": ["liblinear", "saga"],
     "lr__class_weight": [None, "balanced"],

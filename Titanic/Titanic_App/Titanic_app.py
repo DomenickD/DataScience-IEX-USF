@@ -66,7 +66,8 @@ st.write(
 ---
 ## Problem Statement
 The goal of this project is to develop a predictive model that accurately \
-    identifies factors influencing passenger survival rates during the tragic sinking of the RMS Titanic. 
+    identifies factors influencing passenger survival rates \
+            during the tragic sinking of the RMS Titanic. 
          By analyzing historical passenger data, we seek to uncover patterns \
             and relationships between individual characteristics 
          (such as age, gender, socio-economic class, cabin location, etc.) \
@@ -79,20 +80,22 @@ st.write(
 ---       
 ## List of Column Names and what the values represent
          
-| Column Name    | Description                                                                     |
-|----------------|---------------------------------------------------------------------------------|
-| PassengerId    | A unique numerical identifier assigned to each passenger.                         |
-| Survived       | Survival status of the passenger (0 = No, 1 = Yes).                              |
-| Pclass         | The passenger's ticket class (1 = 1st Class, 2 = 2nd Class, 3 = 3rd Class).   |
-| Name           | The passenger's full name.                                                      |
-| Sex            | The passenger's gender (male, female).                                         |
-| Age            | The passenger's age in years. Fractional values may exist for younger children. |
-| SibSp          | The number of siblings or spouses traveling with the passenger.                   |
-| Parch          | The number of parents or children traveling with the passenger.                   |
-| Ticket         | The passenger's ticket number.                                                  |
-| Fare           | The price the passenger paid for their ticket.                                  |
-| Cabin          | The passenger's cabin number (if recorded).                                    |
-| Embarked       | The passenger's port of embarkation (C = Cherbourg, Q = Queenstown, S = Southampton). |
+| Column Name    | Description                                                                 |
+|----------------|-----------------------------------------------------------------|
+| PassengerId    | A unique numerical identifier assigned to each passenger.                   |
+| Survived       | Survival status of the passenger (0 = No, 1 = Yes).                         |
+| Pclass         | The passenger's ticket class (1 = 1st Class, 2 = 2nd Class, 3 = 3rd Class). |
+| Name           | The passenger's full name.                                                  |
+| Sex            | The passenger's gender (male, female).                                      |
+| Age            | The passenger's age in years. Fractional values may exist for \
+    young children.|
+| SibSp          | The number of siblings or spouses traveling with the passenger.             |
+| Parch          | The number of parents or children traveling with the passenger.             |
+| Ticket         | The passenger's ticket number.                                              |
+| Fare           | The price the passenger paid for their ticket.                              |
+| Cabin          | The passenger's cabin number (if recorded).                                 |
+| Embarked       | The passenger's port of embarkation (C = Cherbourg, Q = Queenstown, \
+    S = Southampton). |
 ---
 """
 )
@@ -109,8 +112,8 @@ test["Sex_binary"] = test.Sex.map({"male": 0, "female": 1})
 
 
 class RoundingTransformer(BaseEstimator, TransformerMixin):
-    def fit(self, X, y=None):
-        return self  # Nothing to fit
+    def fit(self):
+        return self
 
     def transform(self, X):
         X = X.round()
@@ -173,7 +176,7 @@ accuracy = accuracy_score(y_test, predictions)
 
 param_grid = {
     "lr__penalty": ["l1", "l2"],
-    "lr__C": [0.001, 0.01, 0.1, 1, 10, 100, 110, 125, 150, 200],
+    # "lr__C": [0.001, 0.01, 0.1, 1, 10, 100, 110, 125, 150, 200],
     "lr__C": np.logspace(-3, 2, num=10),
     "lr__solver": ["liblinear", "saga"],
     "lr__class_weight": [None, "balanced"],
