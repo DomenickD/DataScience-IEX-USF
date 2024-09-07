@@ -1,7 +1,7 @@
 pylint
 streamlit
 tensorflow
-pytorch
+torch
 nltk
 scikit-learn 
 wordcloud
@@ -20,3 +20,4 @@ joblib
 Flask
 Flask-Cors
 plotly
+torchaudio
