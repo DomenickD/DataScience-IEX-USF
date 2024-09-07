@@ -1,3 +1,4 @@
+"""Plots page for streamlit app"""
 import streamlit as st
 import plotly.express as px  # pip install plotly
 import plotly.graph_objects as go
@@ -7,7 +8,7 @@ import seaborn as sns
 import pandas as pd
 import numpy as np
 
-import Titanic_app as titanic
+import titanic_app as titanic
 from sklearn.model_selection import cross_val_score, learning_curve, validation_curve
 
 
@@ -40,7 +41,8 @@ else:
 st.dataframe(filtered_data)
 st.write(f"{filtered_data["PassengerId"].count()} results are displayed.")
 st.caption(
-    "This is the combined dataset for the Titanic Data. It included the Train and Test csv files from Kaggle."
+    "This is the combined dataset for the Titanic Data. \
+        It included the Train and Test csv files from Kaggle."
 )
 
 st.write("""---""")
@@ -108,7 +110,8 @@ fig.update_layout(barmode="group", xaxis_range=[-0.5, 1.5], bargap=0.1)
 st.plotly_chart(fig)
 
 st.caption(
-    """This shows a side by side of the amount of males to females who survived the Titanic and did not survive."""
+    """This shows a side by side of the amount of males to \
+    females who survived the Titanic and did not survive."""
 )
 
 st.write("""---""")

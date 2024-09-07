@@ -1,9 +1,9 @@
+"""Prediction tool streamlit app"""
+
+import pickle
 import streamlit as st
 import pandas as pd
-import pickle
-from sklearn.preprocessing import MinMaxScaler
 
-# min_max_scaler = MinMaxScaler()
 st.header("How would you fare if you were on the Titanic?")
 
 st.subheader("Survival Predictor Tool")
@@ -51,8 +51,8 @@ if st.button("Predict"):
         st.error("You did not survive...")
         st.markdown(
             """
-                    <h2 style='text-align: center; color: red;'> ❌ You did not survive... </h2> 
-                    """,
+    <h2 style='text-align: center; color: red;'> ❌ You did not survive... </h2> 
+            """,
             unsafe_allow_html=True,
         )
         st.image("Pictures/wasted.png")
