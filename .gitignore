@@ -8,6 +8,9 @@ Python_Practice/
 
 EoF_Prediction/2024-01-01-2024-08-16.csv
 
+update.txt
+
+
 # Important Considerations:
 
 # Existing files: If you've already committed files from the NLP/aclImdb folder to your repository, Git will continue to track them even after you add this rule to your .gitignore file. You'll need to remove them from the repository using git rm --cached NLP/aclImdb/* before this rule takes effect.

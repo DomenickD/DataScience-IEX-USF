@@ -1,5 +1,7 @@
-import streamlit as st
+"""The entry point for the streamlit app for this test"""
+
 import requests
+import streamlit as st
 import pandas as pd
 
 st.title("Database Query App")
@@ -7,17 +9,19 @@ st.title("Database Query App")
 # Checkbox for selecting the table name
 table_selected = st.checkbox("Use Titanic dataset", value=False)
 
-query = ""
+QUERY = ""
 if table_selected:
-    query = "SELECT * FROM titanic_data;"
+    QUERY = "SELECT * FROM titanic_data;"
 
 
-query = st.text_area(label="Enter your SQL query here:", value=query)
+query = st.text_area(label="Enter your SQL query here:", value=QUERY)
 
 # st.write(query)
 
 if st.button("Submit"):
-    response = requests.post("http://flask-container:5000/query", json={"query": query})
+    response = requests.post(
+        "http://flask-container:5000/query", json={"query": query}, timeout=15
+    )
 
     if response.status_code == 200:
         try:

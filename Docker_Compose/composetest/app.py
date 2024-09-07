@@ -1,3 +1,5 @@
+"""Flask walkthrough for docker compose"""
+
 import time
 
 import redis
@@ -8,6 +10,7 @@ cache = redis.Redis(host="redis", port=6379)
 
 
 def get_hit_count():
+    """Counts the times it is pinged"""
     retries = 5
     while True:
         try:
@@ -21,5 +24,6 @@ def get_hit_count():
 
 @app.route("/")
 def hello():
+    """Hello World style for Flask walkthrough"""
     count = get_hit_count()
-    return "Hello Docker! I have been seen {} times.\n".format(count)
+    return f"Hello Docker! I have been seen {count} times.\n"
