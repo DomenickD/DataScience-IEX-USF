@@ -1,0 +1,10 @@
+Flask
+flask-cors
+nltk
+numpy
+pandas
+scikit-learn
+keras
+pandas
+xgboost
+Tensorflow
