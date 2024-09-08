@@ -13,4 +13,4 @@ disable=missing-docstring
 module-naming-style=snake_case
 
 [IMPORTS]
-extension-pkg-whitelist=tensorflow.keras, nltk.downloader
+extension-pkg-whitelist=tensorflow.keras, nltk.corpus, nltk.stem, nltk.tokenize, nltk.downloader
