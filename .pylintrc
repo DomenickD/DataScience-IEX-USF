@@ -11,3 +11,6 @@ disable=missing-docstring
 
 # Allow snake_case for module names, since it is common in Streamlit apps
 module-naming-style=snake_case
+
+[IMPORTS]
+extension-pkg-whitelist=tensorflow.keras, nltk.downloader
