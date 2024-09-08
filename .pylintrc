@@ -1,0 +1,13 @@
+[MASTER]
+
+# Disable specific messages for the entire project
+disable=import-error, no-name-in-module, no-member
+
+# Set the maximum allowed line length
+max-line-length=120
+
+# Ignore docstring related warnings
+disable=missing-docstring
+
+# Allow snake_case for module names, since it is common in Streamlit apps
+module-naming-style=snake_case
