@@ -6,7 +6,7 @@ import seaborn as sns
 import plotly.express as px
 import numpy as np
 from sklearn.model_selection import learning_curve, validation_curve, cross_val_score
-from ..housing_app import (
+from ..housing__streamlit_app import (
     pipeline,
     X_train,
     y_train,
